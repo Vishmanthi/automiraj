@@ -18,16 +18,23 @@ class Users extends CI_Controller{
 			$login=$this->customer_model->login_user($username,$password);
 			if($login){
 				$user_data=array(
-					'user_id'=>$login,
+					'user_id' =>$login[0],
 					'username'=>$username,
 					'logged_in'=>true
 				);
 				$this->session->set_userdata($user_data);
-				$this->session->set_flashdata('login_success','You are now logged in!!');
-				redirect('customers');
+				if($login[1]=='service adviser'){
+					$this->session->set_flashdata('login_success','You are now logged in!!');
+					redirect('index.php/customers');
+				}
+				elseif ($login[1]=='customer') {
+					$this->session->set_flashdata('login_success','You are now logged in!!');
+					redirect('index.php/customer/editProfile');
+				}
+
 			}else{
 				$this->session->set_flashdata('login_fail','Sorry you are not allowed!!');
-				redirect('Welcome');
+				redirect('index.php/Welcome');
 			}
 		}
 
