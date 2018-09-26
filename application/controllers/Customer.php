@@ -31,5 +31,25 @@ class Customer extends CI_Controller {
 	public function serviceHistory(){
 		$this->load->view('customer_serviceHistory'); 
 	}
+	public function editProfileDetails(){
+		$this->load->model("customerDashboard_model");
+		$nic= $this->input->post('nic');
+		$data = array(
+			'title' => $this->input->post('title'),
+			'first_name' => $this->input->post('fname'),
+			'last_name' => $this->input->post('lname'),
+			'phone' => $this->input->post('cno'),
+			'email' => $this->input->post('email'),
+			'address' => $this->input->post('add')
+		);
+		$this->customerDashboard_model->editProfile($nic,$data);
+		$this->session->set_flashdata('customerUpdate_success','Details Updated!');
+		redirect('index.php/customer/editProfile');
+	}
+	public function changePassword(){
+		$this->load->model("customerDashboard_model");
+		
+	}
+
 }
 ?>
