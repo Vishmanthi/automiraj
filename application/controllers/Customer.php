@@ -23,7 +23,10 @@ class Customer extends CI_Controller {
 		
 	}
 	public function editProfile(){
-		$this->load->view('customer_editProfile'); 
+		$this->load->model("customerDashboard_model");
+		$userid=$this->session->user_id;
+		$data['cusData']=$this->customerDashboard_model->getCustomerData($userid);
+		$this->load->view('customer_editProfile',$data); 
 	}
 	public function reserveService(){
 		$this->load->view('customer_reserveService'); 
@@ -48,7 +51,10 @@ class Customer extends CI_Controller {
 	}
 	public function changePassword(){
 		$this->load->model("customerDashboard_model");
-		
+		$old=$this->input->post('old');
+		$encripted_new=password_hash($this->input->post('new'),PASSWORD_BCRYPT);
+		$this->customerDashboard_model->changePassword($old,$encripted_new);
+		redirect('index.php/customer/editProfile');
 	}
 
 }

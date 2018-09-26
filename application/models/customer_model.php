@@ -41,8 +41,6 @@ class Customer_model extends CI_Model{
 	}
 	public function create_customer(){
 		$this->load->database("");
-		$encripted_pass=password_hash($this->input->post('password'),PASSWORD_BCRYPT);
-
 		$data=array(
 			'title'=>$this->input->post('title'),
 			'first_name'=>$this->input->post('first_name'),
