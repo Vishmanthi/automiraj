@@ -18,6 +18,21 @@ class Model extends CI_Model
 		$r=$this->db->query('select name from spares');
 		return $r->result();
 	}
+	public function get_spareBrandDetails()
+	{
+		$this->load->database("");
+		$this->db->select('*');
+		$this->db->from('spares');
+		$this->db->join('spares_brand','spares.spare_id=spares_brand.spare_id','left');
+		//$this->db->where('spares.name',$spare_item);
+		$query=$this->db->get();
+		if($query->num_rows()>0){
+			return $query->result();
+		}else{
+			return false;
+		}
+
+	}
 }
 
 ?>

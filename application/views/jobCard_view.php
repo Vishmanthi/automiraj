@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assests/w3.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assests/dashboard.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>/assests/checkbox.css">
-	<link rel="stylesheet" href="<?php echo base_url(); ?>/assests/combobox.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>/assests/combobox.css"> 
 
 	<style type="text/css">
 		body {font-family: "Lato", sans-serif}
@@ -111,7 +111,7 @@
 					    <th>Amount</th>
 					    <th>Select</th>
 					  </tr>
-					  <?php foreach ($service as $va) {?>
+					  <?php foreach ($service as $va) { ?>
 					  	<tr>
 						    <td><?php echo $va->service_name ?></td>
 						    <td><?php echo $va->description ?></td>
@@ -141,28 +141,33 @@
 					    <th>Total Price</th>
 					    <th>Select</th>
 					  </tr>
-					  <?php foreach ($spare as $va) {?>
+					  <?php foreach ($spare as $va){ ?> 
+				
 					  <tr>
 					  	
-					    <td><?php echo $va->name ?></td>
-						
-					   	<td>
-
+					    <td><?php echo $va->name;?></td>
+					    
+					   	<td >
 					   		<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
-							<div class="custom-select" style="width:150px;background-color: #ccc;color: rgba(0,0,0,0.6);">
-							  
-							  <select id="spares">
-							    <option value="">Select brand</option>
-							    
-					  
+							<!-- <div class="custom-select" style="width:150px;background-color: #ccc;color: rgba(0,0,0,0.6);"> -->
+
+					   		 <select id="spares" onchange="myFunct(this)">
+							    <option value="0">Select brand</option>
+							    <?php foreach ($spare_brand as $sp){ ?>
+								<?php if($sp->name==$va->name){ ?> 
+							    <option value="<?php echo $sp->brand_name ?>" id=""><?php echo $sp->brand_name; ?></option>
+          						<?php } ?>
+							    <?php } ?>
+					   		
 							  </select>
-							  
-							</div>
+							  <!-- </div> -->
+						 
 							
 					   	</td>
-
+					   
+					   
 					   	<td></td>
-					   	<td><input class="dinput" type="text" id="" name="" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
+					   	<td><input onchange="totPrice(this)" class="dinput" type="text" id="quantity" name="" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
 					   	<td></td>
 					   	<td>
 					   		<label class="containerC">
@@ -182,5 +187,43 @@
 		</div>
 	</div>
 	</div>
+		<script type="text/javascript">
+					  
+					   	function myFunct(t){
+					   
+					   	var valC=t.options[t.selectedIndex].text;
+					   	<?php foreach ($spare_brand as $sp){ ?>
+					   	if(t.parentElement.previousElementSibling.innerHTML=='<?php echo $sp->name; ?>'){
+					   		if(valC=='<?php echo $sp->brand_name ?>' ) {
+					   			console.log(valC);
+					   			t.parentElement.nextElementSibling.innerHTML="<?php echo $sp->unit_price; ?>";
+					   		
+					   	}
+					   	}
+			
+					   	<?php } ?>
+					   }
+					
+						</script>
+	<script type="text/javascript">
+					   	function myFunct1(t){
+					   	//t = document.createElement("spares");
+					   	//var cbo = document.getElementById("spares");
+					   	var valC=t.options[t.selectedIndex].text;
+					   	console.log(valC);
+					   	var a=t.parentElement;
+					   	console.log(a);
+					   	console.log(a.previousElementSibling.innerHTML);
+					   	a.nextElementSibling.innerHTML="hhh";	
+					   	}
+
+					   	function totPrice(t){
+					   		var q=Number(t.value);
+					   		var p=Number(t.parentElement.previousElementSibling.innerHTML);
+					   		console.log(p*q);
+					   		t.parentElement.nextElementSibling.innerHTML=q*p;
+					   	}
+					   	</script>	 
+
 </body>
 </html>

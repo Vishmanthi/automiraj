@@ -4,6 +4,7 @@ class JobCard extends CI_Controller{
 		$this->load->model("model");
 		$a['service']=$this->model->get_data();
 		$a['spare']=$this->model->get_spareData();
+		$a['spare_brand']=$this->model->get_spareBrandDetails();
 		$this->load->view('jobCard_view',$a);
 	}
 	
