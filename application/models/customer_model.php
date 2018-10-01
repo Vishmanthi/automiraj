@@ -1,19 +1,26 @@
 <?php
 class Customer_model extends CI_Model{
 	public function login_user($username,$password){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from("users");
 		$this->db->where('username',$username);
+		
 
 		//$r=$this->db->query('select * from users where username=?',$username);
 
-		$result=$this->db->get('users');
+		$result = $this->db->get();
 		//$row = $r->row();
 		if($result->num_rows() > 0){
 			$userType=$result->row(0)->type;
 			$db_password=$result->row(0)->password;
-			if(password_verify($password,$db_password)&&($userType=='service adviser')){
-				return $result->row(0)->id;
+			$nicNo=$result->row(0)->id;
+			$arr = array($nicNo,$userType);
+			if(password_verify($password,$db_password)&&(($userType=='service adviser')||($userType=='customer'))){
+				return $arr;
 				//return true;
-			}else{
+			}
+			else{
 				return false;
 			}
 		}else{
@@ -34,8 +41,6 @@ class Customer_model extends CI_Model{
 	}
 	public function create_customer(){
 		$this->load->database("");
-		$encripted_pass=password_hash($this->input->post('password'),PASSWORD_BCRYPT);
-
 		$data=array(
 			'title'=>$this->input->post('title'),
 			'first_name'=>$this->input->post('first_name'),
