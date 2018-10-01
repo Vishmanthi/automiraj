@@ -27,15 +27,14 @@ body {font-family: "Lato", sans-serif}
 	  <div class="w3-bar w3-card w3-black" style="opacity: 0.8">
 	    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right buttonop" href="javascript:void(0)" onclick="navigation()" title="Toggle Navigation Menu" style="padding: 13px 20px"><i class="fa fa-bars"></i></a>
 	    <a class="w3-bar-item w3-button w3-hide-small w3-hide-large w3-right buttonop" href="javascript:void(0)" onclick="navigation1()" title="Toggle Navigation Menu" style="padding: 13px 20px"><i class="fa fa-bars"></i></a>
-	    <img class="w3-bar-item" style="padding: 0px 0px;height:45px;width: 209px" src="<?php echo base_url(); ?>/assests/images/logo2.png">
+	    <img class="w3-bar-item " style="padding: 3px 0px" src="<?php echo base_url(); ?>/assests/images/logo1.jpg" style="max-width:100%">
 	    <div class="w3-right">
-	      <a href="../welcome" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small " style="padding: 13px 16px">HOME</a>
-	      <a href="../welcome#about" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">ABOUT US</a>
-	      <a href="../welcome#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">SERVICES</a>
-	      <a href="../welcome#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow" style="padding: 13px 16px">CONTACT</a>
+	      <a href="#" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small " style="padding: 13px 16px">HOME</a>
+	      <a href="#about" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">ABOUT US</a>
+	      <a href="#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">SERVICES</a>
+	      <a href="#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow" style="padding: 13px 16px">CONTACT</a>
 	      <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">PROMOTIONS</a>
-	      <a href="../customer/reserveService" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">DASHBOARD</a>
-	      <a href="../users/logout" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small" style="padding: 13px 16px;width: auto;">LOGOUT</a>
+	      <a onclick="document.getElementById('login').style.display='block'" class="w3-bar-item w3-button  w3-hover-yellow w3-hide-small" style="padding: 13px 16px;width: auto;">LOGIN</a>
 	      
 	    </div>
 	  </div>

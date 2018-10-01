@@ -20,24 +20,29 @@ class Users extends CI_Controller{
 				$user_data=array(
 					'user_id' =>$login[0],
 					'username'=>$username,
-					'logged_in'=>true
+					'logged_in'=>true,
+					'type' =>$login[1]
 				);
 				$this->session->set_userdata($user_data);
 				if($login[1]=='service adviser'){
 					$this->session->set_flashdata('login_success','You are now logged in!!');
-					redirect('index.php/customers');
+					redirect('/customers');
 				}
 				elseif ($login[1]=='customer') {
 					$this->session->set_flashdata('login_success','You are now logged in!!');
-					redirect('index.php/customer/editProfile');
+					redirect('/customer/reserveService');
 				}
 
 			}else{
 				$this->session->set_flashdata('login_fail','Sorry you are not allowed!!');
-				redirect('index.php/Welcome');
+				redirect('welcome');
 			}
 		}
 
+	}
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('welcome');
 	}
 
 	

@@ -77,13 +77,10 @@ div.content {
   <div class="w3-content" style="max-width:2000px;margin-top:49px;">
     
     <div class="sidebar" >
-      <div class="w3-center">
-        <a href="../customer/editProfile" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/user.png"><br>Edit Profile</a>
-              
+      <div class="w3-center">    
           <a href="../customer/reserveService" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/add2.png"><br>Reserve Service</a>
-          
-          
           <a href="../customer/serviceHistory" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/car2.png"><br>Service History</a>
+          <a href="../customer/editProfile" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/user.png"><br>Edit Profile</a>
         </div>
     </div>
   </div>

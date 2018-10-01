@@ -21,6 +21,12 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('home');
+		if($this->session->type=='customer'){
+			$this->load->view('customer_header2');
+		}
+		else{
+			$this->load->view('home_header');
+		}
 	}
 	public function log()
 	{

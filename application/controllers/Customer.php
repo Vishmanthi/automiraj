@@ -32,7 +32,12 @@ class Customer extends CI_Controller {
 		$this->load->view('customer_reserveService'); 
 	}
 	public function serviceHistory(){
-		$this->load->view('customer_serviceHistory'); 
+		$this->load->model("customerDashboard_model");
+		$userid=$this->session->user_id;
+		$vehicle_no=$this->input->post('vehicle_no');
+		$data['vehicleData']=$this->customerDashboard_model->getVehicleData($userid);
+		$data['service']=$this->customerDashboard_model->getServiceHistory($vehicle_no);
+		$this->load->view('customer_serviceHistory',$data);
 	}
 	public function editProfileDetails(){
 		$this->load->model("customerDashboard_model");
@@ -55,6 +60,12 @@ class Customer extends CI_Controller {
 		$encripted_new=password_hash($this->input->post('new'),PASSWORD_BCRYPT);
 		$this->customerDashboard_model->changePassword($old,$encripted_new);
 		redirect('index.php/customer/editProfile');
+	}
+	public function getServiceHistory(){
+		$this->load->model("customerDashboard_model");
+		$vehicle_no=$this->input->post('vehicle_no');
+		$data['serviceHis']=$this->customerDashboard_model->getServiceHistory($vehicle_no);
+		$this->load->view('customer_serviceHistory',$data); 
 	}
 
 }

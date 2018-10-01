@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Service Advisor dashboard</title>
+<title>Customer dashboard</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php include 'customer_header.php';?>
@@ -31,14 +31,61 @@
 			<hr style="border-color: rgba(0,0,0,0.2);">
 			
 			<div class="w3-container" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;">
-				<div class="w3-container" style="width: 40%">
-					<label>Enter Vehicle Number</label>
-					<input class="w3-input w3-border w3-round" type="" name="" placeholder="">
-				</div>
-				<div class="w3-container" style="width: 40%">
-					<label>My Vehicles</label>
+				<form method="post" action="../customer/serviceHistory">
+					<div class="w3-container">
 					
+					</div>
+						<div class="w3-row-padding">
+							<div class="w3-col" style="width: 40%;">
+								<h4 class="mont" style="margin-bottom: 15px"><i class="fa fa-car" style="padding: 5px"></i>My Vehicles</h4>
+					<?php foreach ($vehicleData as $row) {?>
+						<div class="w3-hover-shadow w3-card" style="padding: 7px;width: 80%;cursor: pointer;border-radius: 5px;background-color: rgba(255,225,0,0.38);margin-bottom: 10px;">
+							<?php echo $row->veh_reg_no; ?>
+								<span style="margin-left: 10px;"><?php echo $row->make; ?></span>
+								<span style="margin-left: 10px;"><?php echo $row->model; ?></span>
+						</div>
+					<?php } ?>
+
+							</div>
+							<div class="w3-col" style="width: 30%">
+								<label>Enter Vehicle Number</label>
+								<input class="w3-input w3-border w3-round" type="" name="vehicle_no" placeholder="">
+							</div>
+							<div class="w3-col" style="width: 20%">
+								<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 40px 30px;padding: 12px 20px;">Search</button>
+							</div>
+							
+						</div>
+					
+				</form>
+				
+				
+				<div class="w3-container" style="margin-top: 20px;">
+					<table class="w3-table-all">
+						<tr>
+							<th>Date</th>
+							<th>JobCard ID</th>
+							<th>Services</th>
+							<th>Spare Parts Used</th>
+						</tr>
+						
+						<?php if (is_array($service) || is_object($service)){?>
+						<?php foreach ($service as $row) {?>
+							<tr>
+								<td><?php echo $row[0][0]; ?></td>
+								<td><?php echo $row[0][1]; ?></td>
+								<td><?php echo implode(',',$row[1]); ?></td>
+								<td><?php echo implode(',',$row[2]); ?></td>		
+							</tr>	
+							
+						
+						<?php } ?>	
+						<?php }?>
+						
+					
+					</table>
 				</div>
+
 			</div>
 		</div>
 	</div>
