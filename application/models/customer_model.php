@@ -56,6 +56,7 @@ class Customer_model extends CI_Model{
 		$this->db->where('nic',$this->input->post('nic'));
 		//$result=$this->db->get('customer');
 		$id=$this->db->get('customer')->row(0)->id;
+		$encripted_pass=password_hash($this->input->post('password'),PASSWORD_BCRYPT);
 		$d2=array(
 			'id'=>$id,
 			'username'=>$this->input->post('first_name'),
