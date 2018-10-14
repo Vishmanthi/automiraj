@@ -110,7 +110,7 @@
 			</div>
 			</div>
 			<?php
-			echo	print_r();
+			
 				?>
 		</div>
 	</div>
@@ -137,6 +137,7 @@
       <td><?php echo $row->reservation_date;?></td>
       <td><?php echo $row->title;?></td>
     </tr>
+	
 		<?php } ?>
 		
 		</table>
