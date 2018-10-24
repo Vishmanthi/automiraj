@@ -18,8 +18,8 @@
 	  		font-family: "Calibri", sans-serif;
 		}
 		label {font-family: "Lato", sans-serif;margin-top: 15px;margin-bottom: 7px;display: block;color: rgba(0,0,0,0.8);}
-		.label1 {font-family: "Lato", sans-serif;display: inline-block;color: rgba(0,0,0,0.6);padding-left: 5px;}
-		.label2	{font-family: "Lato", sans-serif;display: inline-block;color: rgba(0,0,0,0.9);padding: 7px 20px}
+		.label1 {font-family: "Lato", sans-serif;display: inline-block;color: rgba(0,0,0,0.6);padding: 10px 0 10px 5px;}
+		.label2	{font-family: "Lato", sans-serif;display: inline-block;color: rgba(0,0,0,0.9);padding: 10px 20px}
 		input {margin-bottom: 15px;}
 		a {text-decoration: none;}
 		/* Popup container - can be anything you want */
@@ -79,8 +79,8 @@
 		<div class="sidebar">
 			<a class="" onclick=""><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 			<a class="" href=""><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add new Item </a>
-		    <a class="" href=""><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Manage Inventory</a>
-		    <a class="" href=""><i class="fa fa-car" style="padding-right: 10px"></i>Manage Suppliers</a>
+		    <a class="" href="manage_inventory"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Manage Inventory</a>
+		    <a class="" href="manage_supplier"><i class="fa fa-car" style="padding-right: 10px"></i>Manage Suppliers</a>
 		    <a class="" href=""><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Reports</a>
 		    
 		</div>
@@ -105,22 +105,30 @@
 				<div class="w3-col m5" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right:16px">
 					<h3 class="mont" style="padding: 20px 20px 7px;color: rgba(0,0,0,0.7);">Overview</h3>
 					
-					<div class="w3-row-padding">
-						<div class="w3-col w3-container">
+					<div class="w3-row-padding" >
+						<div class="w3-col" style="width: 30%">
 							<span class="label1">Item code</span>
-							<span class="label2" style="padding-left: 3.05cm;">89</span>
+						</div>
+						<div class="w3-col" style="width: 25%">
+							<span class="label2"></span>
 						</div>
 					</div>
 					<div class="w3-row-padding">
-						<div class="w3-col w3-container">
+						<div class="w3-col" style="width: 30%">
 							<span class="label1">Available Quantity</span>
-							<span class="label2" style="padding-left: 1.53cm;">78</span>
+						</div>
+						<div class="w3-col" style="width: 25%">
+							<span class="label2" ></span>
 						</div>
 					</div>
 					<div class="w3-row-padding">
-						<div class="w3-col w3-container">
+						<div class="w3-col w3-container" style="width: 30%">
 							<span class="label1">Reorder Level</span>
-							<span class="label2" style="padding-left: 2.35cm;">78</span>
+						</div>
+						<div class="w3-col" style="width: 25%">
+							<span class="label2"></span>
+						</div>
+						<div class="w3-col" style="width: 10%">
 							<div class="popup">
 							<a href="#reOrder"><i class="fa fa-pencil" aria-hidden="true" id="myBtn"></i></a>
 								<div class="popuptext w3-container" id="reOrder" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right:16px;width: 5.8cm">
@@ -135,7 +143,7 @@
 									</div>
 									<div class="w3-container" >
 										<div class="w3-row-padding">
-											<span class="label1 w3-left" style="font-size: 14px;color: red;margin-top: 5px;">Set Re-Order Level</span>
+											<span class="w3-left" style="font-size: 14px;color: red;margin-top: 5px;">Set Re-Order Level</span>
 										</div>
 										<form>
 											<div class="w3-row-padding">
@@ -151,10 +159,14 @@
 					</div>
 					<h6 class="mont" style="padding: 30px 20px 0px;color: rgb(0,0,0);">Sales Information</h6>
 					<div class="w3-row-padding">
-						<div class="w3-col w3-container">
-							
+						<div class="w3-col" style="width: 30%">
 							<span class="label1" style="margin-bottom: 20px;">Selling Price</span>
-							<span class="label2" style="padding-left: 2.6cm">89</span><i class="fa fa-pencil" aria-hidden="true"></i>
+						</div>
+						<div class="w3-col" style="width: 25%">
+							<span class="label2" ></span>
+						</div>
+						<div class="w3-col" style="width: 10%">
+							<i class="fa fa-pencil" aria-hidden="true"></i>
 						</div>
 					</div>
 				</div>
@@ -168,7 +180,7 @@
 						<div class="w3-col w3-container" style="width: 25%">
 							<span class="label1" style="padding-top: 10px;">Quantity</span>
 						</div>
-						<div class="w3-col w3-container" style="width: 40%">
+						<div class="w3-col w3-container" style="width: 50%">
 							<input class="w3-input w3-border w3-round" name="qty" placeholder="" value="" type="number">
 						</div>
 					</div>
@@ -177,7 +189,7 @@
 						<div class="w3-col w3-container" style="width: 25%">
 							<span class="label1" style="padding-top: 10px;">Purchase Price</span>
 						</div>
-						<div class="w3-col w3-container" style="width: 40%">
+						<div class="w3-col w3-container" style="width: 50%">
 							<input class="w3-input w3-border w3-round" name="p_price" placeholder="" value="" type="text">
 						</div>
 					</div>
@@ -185,7 +197,7 @@
 						<div class="w3-col w3-container" style="width: 25%">
 							<span class="label1" style="padding-top: 10px;">Supplier Name</span>
 						</div>
-						<div class="w3-col w3-container" style="width: 40%">
+						<div class="w3-col w3-container" style="width: 50%">
 							<input class="w3-input w3-border w3-round" name="supp_name" placeholder="" value="" type="text">
 						</div>
 					</div>
