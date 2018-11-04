@@ -9,13 +9,13 @@ class Model extends CI_Model
 	public function get_data()
 	{
 		$this->load->database("");
-		$r=$this->db->query('select service_name,description,price from service');
+		$r=$this->db->query('select service_id,service_name,description,price from service');
 		return $r->result();
 	}
 	public function get_spareData()
 	{
 		$this->load->database("");
-		$r=$this->db->query('select name from spares');
+		$r=$this->db->query('select * from spares');
 		return $r->result();
 	}
 	public function get_spareBrandDetails()

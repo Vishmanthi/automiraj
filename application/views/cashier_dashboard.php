@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Service Advisor dashboard</title>
+	<title>Cashier dashboard</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php include 'header.php';?>
@@ -73,21 +73,20 @@
 			<a class="" onclick=""><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 		    <a class="" href="customers"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add Customer</a>
 		    <a class="" href="vehicle"><i class="fa fa-car" style="padding-right: 10px"></i>Add Vehicle</a>
-		    <a class="" href="jobCard"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Job card</a>
+		    <a class="" href="Cashier"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Invoice</a>
 		    <a class="" href="serviceHistory"><i class="fa fa-history" style="padding-right: 10px"></i>View Service history</a>
 		</div>
 		
 		<div id="jobcard" class="content">
-		<h2 style="padding: 20px 20px 7px;">Generate Job Card</h2>
+		<h2 style="padding: 20px 20px 7px;">Job Card</h2>
 		<hr/>
 		<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: #f0f0f0;">
-			<form action="jobCard/genJobcard" method="post">
+			<form>
 				<div class="w3-row">
 					<div class="w3-col m6">
 						<label for="cardno">Job card No</label>
             			<input class="dinput" type="text" id="cardno" name="jobcardno" placeholder="" >
-            			<label for="">Odometer read </label>
-            			<input class="dinput" type="text" id="" name="odometerR" placeholder="">
+            			
 
 
 					</div>
@@ -102,29 +101,24 @@
 	
 				<label style="margin-bottom: 12px;"><b>Services</b></label>
 				<div class="w3-container " style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px;background-color:white;">
-					<div style="margin-bottom: 19px;float:left;"></div>
-					<div style="float: right;margin-bottom: 19px;"></div>
+					<div style="margin-bottom: 19px;float:left;">records per page</div>
+					<div style="float: right;margin-bottom: 19px;">Search</div>
 					<table class="w3-card-4">
 					  <tr>
 					    <th>Service</th>
 					    <th>Description</th>
 					    <th>Amount</th>
-					    <th>Select</th>
+					   
 					  </tr>
 					  <?php foreach ($service as $va) { ?>
 					  	<tr>
 						    <td><?php echo $va->service_name ?></td>
 						    <td><?php echo $va->description ?></td>
 						    <td><?php echo $va->price ?></td>
-						    <td>
-						    	<label class="containerC">
-	  							<input type="checkbox" name="<?php echo $va->service_id;?>" value="<?php echo $va->service_id;?>" id="<?php echo $va->service_id;?>">
-	  							<span class="checkmark"></span>
-								</label>
-							</td>
+						    
 					  	</tr>
 					  <?php } ?>
-					</table> 
+					</table>
 				</div>
 
 
@@ -151,7 +145,7 @@
 					   		<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
 							<!-- <div class="custom-select" style="width:150px;background-color: #ccc;color: rgba(0,0,0,0.6);"> -->
 
-					   		 <select id="spares" onchange="myFunct(this)" name="<?php echo $va->name ?>">
+					   		 <select id="spares" onchange="myFunct(this)">
 							    <option value="0">Select brand</option>
 							    <?php foreach ($spare_brand as $sp){ ?>
 								<?php if($sp->name==$va->name){ ?> 
@@ -167,14 +161,9 @@
 					   
 					   
 					   	<td></td>
-					   	<td><input onchange="totPrice(this)" class="dinput" type="text" id="quantity" name="<?php echo "q".$va->spare_id ?>" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
+					   	<td><input onchange="totPrice(this)" class="dinput" type="text" id="quantity" name="" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
 					   	<td></td>
-					   	<td>
-					   		<label class="containerC">
-  								<input type="checkbox" name="<?php echo $va->spare_id;?>" value="<?php echo $va->spare_id;?>" id="<?php echo $va->spare_id;?>">
-  								<span class="checkmark"></span>
-							</label>
-						</td>
+					   
 					  </tr>
 					  <?php } ?>
 					  

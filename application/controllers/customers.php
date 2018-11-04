@@ -17,7 +17,7 @@ class Customers extends CI_Controller{
 	 	$this->form_validation->set_rules('email','Email','trim|required|valid_email');
 	 	$this->form_validation->set_rules('password','Password','trim|required');
 	 	$this->form_validation->set_rules('con_pass','Confirm Password','trim|required|matches[password]');
-	 
+	    
 	 	if($this->form_validation->run()==False){
             $data=array(
             		'errors'=>validation_errors()
@@ -36,7 +36,22 @@ class Customers extends CI_Controller{
 			 // 	echo "something wrong";
 			 // }
 			
-	 	} 
+		 } 
+		 
+		 public function valid_nic($string)
+		 {
+			 if ( preg_match('/([0-9]{9}[V]|[0-9]{12})/', $string)) 
+			 
+			 {
+				return TRUE;
+			 }
+			 else
+			 {
+				$this->form_validation->set_message('valid_team_name', 'The %s field must not contain special characters');
+				return FALSE;
+			 }
+		 } 
+	 
 
 
 	 
