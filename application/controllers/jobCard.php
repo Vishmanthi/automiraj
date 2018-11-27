@@ -12,6 +12,8 @@ class JobCard extends CI_Controller{
 		$this->load->model('jobCard_model');
 	 	$this->jobCard_model->addJobCard ();
 	}
+
+	
 	
 }
 ?>

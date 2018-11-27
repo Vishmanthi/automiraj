@@ -65,6 +65,7 @@
 		.select-items div:hover, .same-as-selected {
 		  background-color: rgba(0, 0, 0, 0.1);
 		}
+		 
 	</style>
 </head>
 <body>
@@ -81,28 +82,51 @@
 		<h2 style="padding: 20px 20px 7px;">Job Card</h2>
 		<hr/>
 		<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: #f0f0f0;">
-			<form>
+		
+			<form action="Cashier/searchJobCard" method="post">
 				<div class="w3-row">
-					<div class="w3-col m6">
+					<div class="w3-col m2">
 						<label for="cardno">Job card No</label>
+						</div>
+						<div class="w3-col m6">
             			<input class="dinput" type="text" id="cardno" name="jobcardno" placeholder="" >
             			
 
 
 					</div>
-					<div class="w3-col m6">
-						<label for="vno">Vehicle Registration No</label>
-            			<input class="dinput" type="text" id="vno" name="vehicleno" placeholder="" >
+					<div class="w3-col m3">
+					
+          	<button class="w3-button w3-green" type="submit" id="vno" name="search" placeholder="" >Search</button>
             			
 
             		</div>
-						
+								
+					<div class="w3-row">
+					<div class="w3-col m2">
+						<label for="cardno">Vehicle No</label>
+						</div>
+						<div class="w3-col m6">
+            			<input class="dinput" type="text" id="cardno" name="vehno" placeholder="" >
+            			
+
+
+					</div>
+					<div class="w3-row">
+					<div class="w3-col m2">
+						<label for="cardno">Date</label>
+						</div>
+						<div class="w3-col m6">
+            			<input class="dinput" type="text" id="cardno" name="date" placeholder="" >
+            			
+
+
+					</div>
 				</div>
 	
 				<label style="margin-bottom: 12px;"><b>Services</b></label>
 				<div class="w3-container " style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px;background-color:white;">
-					<div style="margin-bottom: 19px;float:left;">records per page</div>
-					<div style="float: right;margin-bottom: 19px;">Search</div>
+					<div style="margin-bottom: 19px;float:left;"></div>
+					<div style="float: right;margin-bottom: 19px;"></div>
 					<table class="w3-card-4">
 					  <tr>
 					    <th>Service</th>
@@ -110,22 +134,26 @@
 					    <th>Amount</th>
 					   
 					  </tr>
-					  <?php foreach ($service as $va) { ?>
+						<?php if (isset($services)){ ?> 
+					  <?php foreach($services as $ser){ ?>
+						
 					  	<tr>
-						    <td><?php echo $va->service_name ?></td>
-						    <td><?php echo $va->description ?></td>
-						    <td><?php echo $va->price ?></td>
+						    <td><?php echo $ser->service_name; ?></td>
+						    <td><?php echo $ser->description; ?></td>
+						    <td><?php echo $ser->price; ?></td>
 						    
 					  	</tr>
-					  <?php } ?>
+						<?php } ?>
+						 <?php } ?> 
+						 
 					</table>
 				</div>
 
 
 				<label style="margin-bottom: 12px;margin-top: 20px;"><b>Spare parts</b></label>
 				<div class="w3-container " style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px;background-color:white;">
-					<div style="margin-bottom: 15px;float: left;">records per page</div>
-					<div style="float: right;margin-bottom: 19px;">Search</div>
+					<div style="margin-bottom: 15px;float: left;"></div>
+					<div style="float: right;margin-bottom: 19px;"></div>
 					<table class="w3-card-4" id="table">
 					  <tr>
 					    <th>Spare Item</th>
@@ -133,86 +161,38 @@
 					    <th>Unit Price</th>
 					    <th>Quantity</th>
 					    <th>Total Price</th>
-					    <th>Select</th>
+					   
 					  </tr>
-					  <?php foreach ($spare as $va){ ?> 
-				
+						<?php if (isset($spares)){ ?> 
+					  <?php foreach($spares as $spare){ ?>
 					  <tr>
 					  	
-					    <td><?php echo $va->name;?></td>
+					    <td><?php echo $spare->name;?></td>
 					    
-					   	<td >
-					   		<!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
-							<!-- <div class="custom-select" style="width:150px;background-color: #ccc;color: rgba(0,0,0,0.6);"> -->
-
-					   		 <select id="spares" onchange="myFunct(this)">
-							    <option value="0">Select brand</option>
-							    <?php foreach ($spare_brand as $sp){ ?>
-								<?php if($sp->name==$va->name){ ?> 
-							    <option value="<?php echo $sp->brand_name ?>" id=""><?php echo $sp->brand_name; ?></option>
-          						<?php } ?>
-							    <?php } ?>
-					   		
-							  </select>
-							  <!-- </div> -->
-						 
+					   	<td ><?php echo $spare->brand;?></td>
+					   
 							
-					   	</td>
-					   
-					   
-					   	<td></td>
-					   	<td><input onchange="totPrice(this)" class="dinput" type="text" id="quantity" name="" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
-					   	<td></td>
+					   	<td><?php echo $spare->unit_price;?></td>
+							
+					   	<td><?php echo $spare->qty;?></td>
+					   	<td><?php echo $spare->qty*$spare->unit_price;?></td>
 					   
 					  </tr>
-					  <?php } ?>
+						<?php } ?>
+						<?php } ?>
 					  
 					</table>
 				</div>
+				</form>
+				<form method="post" action="Pdf_Controller/genPDFInvoice">
 				<div style="text-align: center;">
-					<button class="button-green" type="submit" style="width: 20%;margin-top: 20px;"><i class="fa fa-plus"></i>  Add Jobcard</button>
+					<button class="button-green" type="submit" style="width: 20%;margin-top: 20px;" name="genInvoice">Generate Invoice</button>
 				</div> 
-			</form>
+		</form>
 		</div>
 	</div>
 	</div>
-		<script type="text/javascript">
-					  
-					   	function myFunct(t){
-					   
-					   	var valC=t.options[t.selectedIndex].text;
-					   	<?php foreach ($spare_brand as $sp){ ?>
-					   	if(t.parentElement.previousElementSibling.innerHTML=='<?php echo $sp->name; ?>'){
-					   		if(valC=='<?php echo $sp->brand_name ?>' ) {
-					   			console.log(valC);
-					   			t.parentElement.nextElementSibling.innerHTML="<?php echo $sp->unit_price; ?>";
-					   		
-					   	}
-					   	}
-			
-					   	<?php } ?>
-					   }
-					
-						</script>
-	<script type="text/javascript">
-					   	function myFunct1(t){
-					   	//t = document.createElement("spares");
-					   	//var cbo = document.getElementById("spares");
-					   	var valC=t.options[t.selectedIndex].text;
-					   	console.log(valC);
-					   	var a=t.parentElement;
-					   	console.log(a);
-					   	console.log(a.previousElementSibling.innerHTML);
-					   	a.nextElementSibling.innerHTML="hhh";	
-					   	}
-
-					   	function totPrice(t){
-					   		var q=Number(t.value);
-					   		var p=Number(t.parentElement.previousElementSibling.innerHTML);
-					   		console.log(p*q);
-					   		t.parentElement.nextElementSibling.innerHTML=q*p;
-					   	}
-					   	</script>	 
+		
 
 </body>
 </html>

@@ -167,7 +167,7 @@
 					   
 					   
 					   	<td></td>
-					   	<td><input onchange="totPrice(this)" class="dinput" type="text" id="quantity" name="<?php echo "q".$va->spare_id ?>" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
+					   	<td><input onchange="totPrice(this)" class="dinput" type="number" id="quantity" name="<?php echo "q".$va->spare_id ?>" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
 					   	<td></td>
 					   	<td>
 					   		<label class="containerC">

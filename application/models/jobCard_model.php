@@ -51,5 +51,7 @@ class jobCard_model extends CI_Model
            
         }
     }
+
+   
 }
 ?>

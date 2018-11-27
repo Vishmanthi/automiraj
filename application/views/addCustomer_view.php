@@ -29,6 +29,9 @@
 			    <?php if($this->session->flashdata('errors')):?>
 			    <?php echo $this->session->flashdata('errors');?>
 			    <?php endif;?>
+				<?php if($this->session->flashdata('nErr')):?>
+			    <?php echo $this->session->flashdata('nErr');?>
+			    <?php endif;?>
 			</p>
 			</div>
 			<p class="w3-light-green">
