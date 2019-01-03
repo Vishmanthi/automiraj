@@ -10,7 +10,8 @@ class JobCard extends CI_Controller{
 
 	public function genJobcard(){
 		$this->load->model('jobCard_model');
-	 	$this->jobCard_model->addJobCard ();
+		 $this->jobCard_model->addJobCard ();
+		 redirect('Jobcard');
 	}
 
 	

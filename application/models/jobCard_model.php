@@ -20,7 +20,8 @@ class jobCard_model extends CI_Model
                 $s_id=$row->service_id;
                 $d=array(
                     'job_id'=>$j_id,
-                    'service_id'=>$s_id
+                    'service_id'=>$s_id,
+                    'discount'=>0
                 );
                 $insert_data2=$this->db->insert('jobcard_service',$d);
                 
@@ -42,7 +43,7 @@ class jobCard_model extends CI_Model
                     'job_id'=>$j_id,
                     'spare_id'=>$s_id,
                     'brand'=>$this->input->post($row->name),
-                    'quantity'=>$this->input->post('q'.$row->spare_id)
+                    'qty'=>$this->input->post('q'.$row->spare_id)
 
                 );
                 $insert_data3=$this->db->insert('jobcard_spare',$d);

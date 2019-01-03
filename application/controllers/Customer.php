@@ -40,7 +40,7 @@ class Customer extends CI_Controller {
 		$userid=$this->session->user_id;
 		$data['cusData']=$this->customerDashboard_model->getCustomerData($userid);
 		$data['resData']=$this->customerDashboard_model->getReservations($year,$month);
-		$data['detRes']=$this->customerDashboard_model->getReservationDetails();
+		$data['detRes']=$this->customerDashboard_model->getReservationDetails($year,$month);
 		$data['year']=$year; 
 		$data['month']=$month;
 		$this->load->view('customer_reserveService',$data); 
@@ -106,6 +106,15 @@ class Customer extends CI_Controller {
 		);
 		$this->customerDashboard_model->RescheduleRes($id,$data);
 		$this->session->set_flashdata('reschedule_success','Rescheduled Successfully!');
+		redirect('index.php/customer/reserveService');
+	}
+
+	public function DeleteRes(){
+		$d=$this->input->post("date");
+		//$str_arr = explode ("-", $d); 
+		//$date=implode("/",$str_arr);
+		$this->load->model("customerDashboard_model");
+		$this->customerDashboard_model->deleteReservation($d);
 		redirect('index.php/customer/reserveService');
 	}
 
