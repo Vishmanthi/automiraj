@@ -146,7 +146,7 @@ span.psw {
         <?php echo $this->session->flashdata('errors');?>
         <?php endif;?>
         </p> -->
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
       <img src="img_avatar2.png" alt="Avatar" class="avatar">
     </div>
 
