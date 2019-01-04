@@ -10,11 +10,12 @@ class Customers extends CI_Controller{
 	
 
 	 public function register(){
-		$nic= $this->input->post("nic");
-		$this->valid_nic($nic);
+		// $nic= $this->input->post("nic");
+		// $this->valid_nic($nic);
 	 	$this->form_validation->set_rules('first_name','First Name','trim|required');
 	 	$this->form_validation->set_rules('last_name','Last Name','trim|required');
-       // $this->form_validation->set_rules('nic','ID Number','trim|required|in_list[10,12]');
+		//$this->form_validation->set_rules('nic','ID Number','trim|required|regex_match[/[0-9]{12}|[0-9]{9}[V]/]');
+		$this->form_validation->set_rules('nic','ID Number','trim|required|callback_valid_nic');
 	 	$this->form_validation->set_rules('phone','Phone Number','trim|required|exact_length[10]');
 	 	$this->form_validation->set_rules('email','Email','trim|required|valid_email');
 	 	$this->form_validation->set_rules('password','Password','trim|required');
@@ -22,8 +23,8 @@ class Customers extends CI_Controller{
 	    
 	 	if($this->form_validation->run()==False){
             $data=array(
-					'errors'=>validation_errors(),
-					'nErr' =>$this->valid_nic($nic)
+					'errors'=>validation_errors()
+					//'nErr' =>$this->valid_nic($nic)
             );
             $this->session->set_flashdata($data);
             redirect('index.php/customers');
@@ -50,8 +51,8 @@ class Customers extends CI_Controller{
 			 }
 			 else
 			 {
-				$this->form_validation->set_message('valid_team_name', 'The %s field must not contain special characters');
-				return "Please Enter a valid NIC No";
+				$this->form_validation->set_message('valid_nic', 'The NIC No is not in the correct format');
+				return FALSE;
 			 }
 		 } 
 	 

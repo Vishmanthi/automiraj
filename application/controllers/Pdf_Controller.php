@@ -3,8 +3,12 @@ class Pdf_Controller extends CI_Controller{
     public function __construct(){
         parent::__construct();
         $this->load->library('pdf');
+        
     }
     public function genPDFInvoice(){
+        $jobid=$this->input->post('jobcardno');
+        $this->load->model('Cashier_model');
+		$html_content=$this->Cashier_model->getJobDetails($jobid);
         // $obj_pdf=new TCPDF('P',PDF_UNIT,PDF_PAGE_FORMAT,true,'UTF_8',false);
         // $obj_pdf->SetCreator(PDF_CREATOR);
         // $obj_pdf->SetTitle("Invoice");
@@ -23,9 +27,10 @@ class Pdf_Controller extends CI_Controller{
         // $obj_pdf->writeHTML($content);
         // ob_clean();
         // $obj_pdf->Output("sample.pdf","I");
-        $this->pdf->loadHtml('Hello');
+    
+        $this->pdf->loadHtml($html_content);
         $this->pdf->render();
-        $this->pdf->stream("abc.pdf",array("Attachment"=>0));
+        $this->pdf->stream("invoice.pdf",array("Attachment"=>0));
     }
 }
 ?>

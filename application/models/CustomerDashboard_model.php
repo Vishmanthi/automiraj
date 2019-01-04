@@ -129,11 +129,15 @@ Class CustomerDashboard_model extends CI_Model{
         {cal_cell_start}<td class="day">{/cal_cell_start}
         {cal_cell_start_today}<td>{/cal_cell_start_today}
         {cal_cell_start_other}<td class="other-month">{/cal_cell_start_other}
+		
+		
 
 		{cal_cell_content}
 		<div class="day_num">{day}</div>
 		<div class="cont">{content}</div>
 		{/cal_cell_content}
+
+		
 		{cal_cell_content_today}
 		<div class="highlight day_num">{day}</div>
 		<div class="content">{content}</div>
@@ -181,7 +185,7 @@ Class CustomerDashboard_model extends CI_Model{
 		//$result = $this->db->get();
 		$cal_data=array();
 		foreach($result->result() as $row){
-			$d;
+			$d=0;
 			$day=substr($row->reservation_date,8,2);
 			$count=0;
 			if($userid==$row->cus_id){
@@ -190,7 +194,7 @@ Class CustomerDashboard_model extends CI_Model{
 				
 			}
 		
-		foreach($result->result() as $r){
+		foreach($result->result() as $r){ 
 			if($day==substr($row->reservation_date,8,2)){
 				$count++;
 			}
@@ -198,9 +202,10 @@ Class CustomerDashboard_model extends CI_Model{
 		if($count>=$maxres){
 			if(!substr($r->reservation_date,8,2)==$d){
 				$cal_data[substr($row->reservation_date,8,2)]="N/A";
-			}else{
-				$cal_data[substr($row->reservation_date,8,2)]="booking N/A";
 			}
+			// else{
+			// 	$cal_data[substr($row->reservation_date,8,2)]="booking";
+			// }
 			
 			
 			
@@ -215,15 +220,24 @@ Class CustomerDashboard_model extends CI_Model{
 		$this->db->update('reservations', $data);
 	}
 	
-	public function getReservationDetails(){
+	public function getReservationDetails($year,$month){
 		$this->load->database("");
 		$userid=$this->session->user_id;
 		$this->db->select("*");
 		$this->db->from("reservations");
+		$this->db->like('reservation_date',$year.'/'.$month,'after');
 		$this->db->where("cus_id",$userid);
 		$result = $this->db->get();
 		return $result->result();
 	}	
 	
+	public function deleteReservation($date){
+		$this->load->database("");
+		$userid=$this->session->user_id;
+		$this->db->where('reservation_date',$date);
+		$this->db->where('cus_id',$userid);
+		$this->db->delete('reservations');
+
+	}
 }
 ?>

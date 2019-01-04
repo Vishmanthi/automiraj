@@ -35,7 +35,7 @@ body {font-family: "Lato", sans-serif}
 	      <a href="../welcome/customer#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow" style="padding: 13px 16px">CONTACT</a>
 	      <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">PROMOTIONS</a>
 	      <a href="../customer/reserveService" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">DASHBOARD</a>
-	      <a href="../users/logout" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small" style="padding: 13px 16px;width: auto;">LOGOUT</a>
+	      <a href="<?php echo base_url(); ?>users/logout" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small" style="padding: 13px 16px;width: auto;">LOGOUT</a>
 	      
 	    </div>
 	  </div>

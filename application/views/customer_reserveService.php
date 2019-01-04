@@ -51,12 +51,23 @@
 		background-color:#DEF;
 	}
 	.cont{
-		width:80px;height:20px;padding:4px;
+		width:80px;height:40px;padding:4px;
 		border:1px solid #999;
 		vertical-align:top;
-		background-color:#F9B4DB
+		background-color:#F66F74
+ 
+ 
  ;
 	}
+
+	.NA{
+		width:80px;height:80px;padding:4px;
+		border:1px solid #999;
+		vertical-align:top;
+		background-color:#F66F74
+ ;
+	}
+	
 	.calendar .days td:hover{
 		background-color: #FFF;
 	}
@@ -81,19 +92,35 @@
 		    <div class="w3-col m10" style="border: 1px solid lightgrey;border-radius: 3px;margin-right: 16px">
 				<?php echo $calendar;?>
 				<script type="text/javascript">
+
+			
 				$(document).ready(function(){
 					$('.calendar .day .nCont').click(function(){
 						day_num=$(this).html();
+						if(day_num.length<2){
+							day_num="0"+day_num;
+						}
+					
 						comDate="<?php echo $year.'/'.$month.'/';?>"+day_num;
+						
 						today="<?php echo date("Y/m/d");?>";
 						if(comDate>today){
 							document.getElementById('id02').style.display='block';
 							document.getElementById("date").value = "<?php echo $year.'/'.$month.'/';?>"+day_num;
+							
 						}
 						
 					});
 					$('.cont').click(function(){
-						document.getElementById('id03').style.display='block';
+						if($(this).text()!="N/A"){
+							document.getElementById('id03').style.display='block';
+							day_num1=$(this).parent().find('.day_num').text();
+							if(day_num1.length<2){
+							day_num1="0"+day_num1;
+						}
+							document.getElementById("date1").value = "<?php echo $year.'/'.$month.'/';?>"+day_num1; 
+						}
+					
 					});
 					$('#reserve').click(function(){
 						document.getElementById('id03').style.display='none';
@@ -124,16 +151,16 @@
 			<table class="w3-table-all w3-hoverable">
     <thead>
       <tr class="w3-light-grey">
-        <th>Vehicle No</th>
+        <th>Res ID</th>
         <th>Reservation Date</th>
-        <th>Title</th>
+        <th>Service</th>
       </tr>
     </thead>
 	
 		<?php foreach( $detRes as $row){ ?>
 	
 		<tr>
-      <td><?php echo $row->veh_no;?></td>
+      <td><?php echo $row->id;?></td>
       <td><?php echo $row->reservation_date;?></td>
       <td><?php echo $row->title;?></td>
     </tr>
@@ -147,7 +174,7 @@
         <div class="w3-section">
 		<label><b>Reservation id</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="id"  required>
-          <label><b>Title</b></label>
+          <label><b>Service</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required>
           <label><b>Reschedule To</b></label>
           <input class="w3-input w3-border" type="text" placeholder="" name="re_date" required>
@@ -169,11 +196,11 @@
         <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
       </div>
 
-      <form class="w3-container" action="../../Reservation" method="post">
+      <form class="w3-container" action="Reservation" method="post">
         <div class="w3-section">
 		<label><b>Vehicle No</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="veh_no"  required>
-          <label><b>Title</b></label>
+          <label><b>Service</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required>
           <label><b>Reserved Date</b></label>
           <input id="date" class="w3-input w3-border" type="text" placeholder="" name="res_date" required>
@@ -198,9 +225,13 @@
 			<br>
 			<br>
 			<br>
+			
       <div class="w3-container">
-			<p class="w3-right">
-			<button class="w3-button w3-ripple w3-red" id="reserve">Reserve</button>
+			<p class="w3-right w3-row" style="float: right;">
+				<form method="post" action="<?php echo base_url(); ?>Customer/deleteRes">
+				<input id="date1" class="w3-input" type="hidden" placeholder="" name="date" required>
+			<button class="w3-button w3-ripple w3-red" id="delete">Delete</button>
+		</form>
   		<button class="w3-button w3-ripple w3-yellow" id="reschedule">Reschedule</button>
       </p>
 			</div>

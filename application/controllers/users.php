@@ -32,6 +32,14 @@ class Users extends CI_Controller{
 					$this->session->set_flashdata('login_success','You are now logged in!!');
 					redirect('/customer/reserveService');
 				}
+				elseif ($login[1]=='cashier') {
+					$this->session->set_flashdata('login_success','You are now logged in!!');
+					redirect('/Cashier/jobcardView');
+				}
+				elseif ($login[1]=='manager') {
+					$this->session->set_flashdata('login_success','You are now logged in!!');
+					redirect('/Manager');
+				}
 
 			}else{
 				$this->session->set_flashdata('login_fail','Sorry you are not allowed!!');

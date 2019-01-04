@@ -113,6 +113,10 @@ span.psw {
     -webkit-animation: animatezoom 0.6s;
     animation: animatezoom 0.6s
 }
+#map{
+  width: 100%;
+  height: 500px;
+}
 
 @-webkit-keyframes animatezoom {
     from {-webkit-transform: scale(0)} 
@@ -252,7 +256,7 @@ window.onclick = function(event) {
 }
 </script>
 <!-- Add Google Maps -->
-<div id="googleMap" style="height:400px;" class="w3-grayscale-max"></div>
+<!-- <div id="googleMap" style="height:400px;" class="w3-grayscale-max"></div>
 <script>
 function myMap() {
   myCenter=new google.maps.LatLng(41.878114, -87.629798);
@@ -268,8 +272,26 @@ function myMap() {
   });
   marker.setMap(map);
 }
+</script> -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script> -->
+<!-- <div id="map"></div>
+<script>
+  function initMap(){
+    var location={lat: 6.872566686342974,lng: 79.899214611105};
+    var map=new google.maps.Map(document.getElementById("map"),{
+    center: location,
+    zoom:5
+});
+  }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBi9zZsp-C1y1UZRLyFiq4_i0AxOpF8qrc&callback=initMap"> -->
+
+<!-- </script> -->
+<div style="height:400px;" class="w3-center">
+<div class="w3_agile_map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.565685096775!2d79.87626091426745!3d6.822556821508461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25ad719623c51%3A0xe6a8ed03c27c878d!2sAuto+Miraj!5e0!3m2!1sen!2slk!4v1546214851403" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div></div>
+<br><br>
 <!--
 To use this code on your website, get a free API key from Google.
 Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
