@@ -150,6 +150,15 @@ class Cashier_model extends CI_Model
       return true ;
   }
 
+  public function getVehicleNo($jobid){
+    $this->load->database("");
+    $this->db->select('vehicle_no');
+    $this->db->from('jobcard');
+    $this->db->where('job_id', $jobid);
+    $r=$this->db->get();
+    return $r->result();
+  }
+
 
 
 }

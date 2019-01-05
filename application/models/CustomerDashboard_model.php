@@ -175,9 +175,10 @@ Class CustomerDashboard_model extends CI_Model{
 
 	public function getReservations($year,$month){
 		$userid=$this->session->user_id;
-		$maxres=2;
-		$count;
+		$maxres=4 ;
+		$count=0;
 		$day;
+		$d=0;
 		
 		$this->load->database("");
 		$result=$this->db->select("*")->from("reservations")->like('reservation_date',$year.'/'.$month,'after')->get();
@@ -190,18 +191,23 @@ Class CustomerDashboard_model extends CI_Model{
 			$count=0;
 			if($userid==$row->cus_id){
 				$cal_data[substr($row->reservation_date,8,2)]="booking";
-				$d=$cal_data[substr($row->reservation_date,8,2)];
-				
+				$d=substr($row->reservation_date,8,2);
+				if(substr($d, 0, 1)=="0"){
+					$cal_data[substr($d,1,1)]="booking";
+				}
 			}
 		
 		foreach($result->result() as $r){ 
-			if($day==substr($row->reservation_date,8,2)){
+			if($day==substr($r->reservation_date,8,2)){
 				$count++;
 			}
 		}
 		if($count>=$maxres){
-			if(!substr($r->reservation_date,8,2)==$d){
+			if($day!=$d){
 				$cal_data[substr($row->reservation_date,8,2)]="N/A";
+				if(substr($day, 0, 1)=="0"){
+					$cal_data[substr($day,1,1)]="N/A";
+				}
 			}
 			// else{
 			// 	$cal_data[substr($row->reservation_date,8,2)]="booking";
@@ -238,6 +244,16 @@ Class CustomerDashboard_model extends CI_Model{
 		$this->db->where('cus_id',$userid);
 		$this->db->delete('reservations');
 
+	}
+
+	public function getRescount($day) {
+		$this->load->database("");
+		$this->db->select('reservation_date, time_slot, count(*) AS con');
+        $this->db->from('reservations');
+        $this->db->where('reservation_date', $day);
+        $this->db->group_by('time_slot');
+        $r=$this->db->get();
+        return $r->result();  
 	}
 }
 ?>

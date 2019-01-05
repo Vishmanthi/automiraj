@@ -26,6 +26,7 @@ class Cashier extends CI_Controller {
 			}
 			$this->load->model('Cashier_model');
 			$data['jobid']=$jobid;
+			$data['vehno']=$this->Cashier_model->getVehicleNo($jobid);
 			$data['services']=$this->Cashier_model->getJobService($jobid);
 			$data['spares']=$this->Cashier_model->getJobSpare($jobid);
 			$this->load->view('cashier_dashboard',$data);

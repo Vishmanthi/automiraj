@@ -80,6 +80,24 @@
 		<div id="jobcard" class="content">
 		<h2 style="padding: 20px 20px 7px;">Generate Job Card</h2>
 		<hr/>
+		<p><?php if($this->session->flashdata('job_success')): ?>
+				<div class="w3-panel w3-pale-green w3-display-container">
+				<span onclick="this.parentElement.style.display='none'"
+ 				class="w3-button w3-large w3-display-topright">&times;</span>
+				<h4>Success!</h4>
+				<?php echo $this->session->flashdata('job_success'); ?>
+				</div>
+				<?php endif; ?></p>
+				
+				<p><?php if($this->session->flashdata('job_failure')): ?>
+				<div class="w3-panel w3-pale-red w3-display-container">
+				<span onclick="this.parentElement.style.display='none'"
+ 				class="w3-button w3-large w3-display-topright">&times;</span>
+				<h4>Sorry!!</h4>
+				<?php echo $this->session->flashdata('job_failure'); ?>
+				</div>
+				<?php endif; ?></p>
+				
 		<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: #f0f0f0;">
 			<form action="jobCard/genJobcard" method="post">
 				<div class="w3-row">
@@ -167,7 +185,7 @@
 					   
 					   
 					   	<td></td>
-					   	<td><input onchange="totPrice(this)" class="dinput" type="number" id="quantity" name="<?php echo "q".$va->spare_id ?>" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
+					   	<td><input onchange="totPrice(this)" oninput="this.value = Math.abs(this.value)" class="dinput" type="number" id="quantity" name="<?php echo "q".$va->spare_id ?>" placeholder="1" style="width: 50px;margin-bottom: 0;margin-left: 0"></td>
 					   	<td></td>
 					   	<td>
 					   		<label class="containerC">

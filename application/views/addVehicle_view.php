@@ -11,6 +11,7 @@
 	<style type="text/css">
 		body {font-family: "Lato", sans-serif}
 	</style>
+	
 </head>
 <body>
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
@@ -36,12 +37,19 @@
         	<?php echo $this->session->flashdata('vehReg_success');?>
         	<?php endif;?>
         	</p>
+			<p class="w3-light-red">
+        	<?php if($this->session->flashdata('vehReg_failure')):?>
+        	<?php echo $this->session->flashdata('vehReg_failure');?>
+        	<?php endif;?>
+        	</p>
 			<div class="w3-container " style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: #f0f0f0;">
 			
 		  		<form action="vehicle/find_customer" method="post">
 		  			<label for="">NIC Number</label>
-	            	<input class="dinput" type="text" id="" name="nic" placeholder="" style="width: 30%;">
-	            	<button class="button-green" type="submit" style="width: 20%;float: right;"><i class="fa fa-search"></i>  Search</button> 
+					 
+	            	<input class="dinput" type="text" id="" name="nic" placeholder="" style="width: 30%;" id="snic" >
+					
+	            	<button class="button-green" onclick="myNic()" type="submit" style="width: 20%;float: right;" id="search"><i class="fa fa-search"></i>  Search</button> 
 
 	            	<!--Table -->
 	          
@@ -64,6 +72,7 @@
 						    <td><?php echo $v->last_name; ?></td>
 						    <td><?php echo $v->address; ?></td>
 						  </tr>
+						
 						   <?php } ?>
 			    		<?php endif;?>
 						  <!--  <?php foreach ($this->session->flashdata('cus_det') as $v) {?>
@@ -84,8 +93,12 @@
 				<form action="vehicle/registerVehicle" method="post">
 					<div class="w3-row">
 						<div class="w3-col m6">
-							<label for="cardno">NIC No</label>
-	            			<input class="dinput" type="text" id="cardno" name="nic" placeholder="" >
+						<?php if($this->session->flashdata('cus_det')):?>
+			    			<?php foreach ($this->session->flashdata('cus_det') as $v) {?>
+							<!-- <label for="cardno">NIC No</label> -->
+	            			<input class="dinput" type="hidden" id="cardno" name="nic" placeholder="" id="nic" value="<?php echo $v->nic;?>" >
+							<?php } ?>
+			    		<?php endif;?>
 	            			<label for="make">Vehicle Make</label>
 	            			<input class="dinput" type="text" id="make" name="make" placeholder="" >
 	            			<label for="model">Vehicle Model</label>
@@ -98,8 +111,8 @@
 	            			<input class="dinput" type="text" id="vno" name="vehicleno" placeholder="" >
 	            			<label for="vno">Vehicle Type</label>
 	            			<input class="dinput" type="text" id="vtype" name="type" placeholder="" >
-	            			<label for="">Additional Information </label>
-	            			<input class="dinput" type="text" id="" name="additional" placeholder="">
+	            			<!-- <label for="">Additional Information </label>
+	            			<input class="dinput" type="" id="" name="additional" placeholder=""> -->
 
 	            		</div>
 							

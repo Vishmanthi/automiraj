@@ -40,10 +40,15 @@ class Vehicle extends CI_Controller{
 
 	 	}else{
 	 		$this->load->model('vehicle_model');
-	 		$this->vehicle_model->create_vehicle();
-			$this->session->set_flashdata('vehReg_success','Vehicle added!!');
-			redirect('index.php/vehicle');
+	 		if($this->vehicle_model->create_vehicle()){
+				$this->session->set_flashdata('vehReg_success','Vehicle added!!');
+				redirect('index.php/vehicle');
+			 }else{
+				$this->session->set_flashdata('vehReg_failure','The added vehicle is already regitered!!');
+				redirect('index.php/vehicle');
 			 }
+			 }
+			
 			 // }else{
 			 // 	echo "something wrong";
 			 // }
