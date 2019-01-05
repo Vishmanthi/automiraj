@@ -10,8 +10,29 @@ class JobCard extends CI_Controller{
 
 	public function genJobcard(){
 		$this->load->model('jobCard_model');
-		 $this->jobCard_model->addJobCard ();
-		 redirect('Jobcard');
+		//echo $this->jobCard_model->addJobCard ();
+		// if($this->jobCard_model->addJobCard ()->db->error()){
+		// 	//$this->session->set_flashdata('job_success','Added jobcard successfully!!'); 
+		// 	$this->session->set_flashdata('job_failure','Sorry!! The jobcard no already exists!!'); 
+		// 	redirect('Jobcard');
+		// }
+		// else{
+		// 	$this->session->set_flashdata('job_success','Added jobcard successfully!!'); 
+		// 	redirect('Jobcard');
+		// }
+
+
+
+		//echo $this->jobCard_model->addJobCard ();
+		if($this->jobCard_model->addJobCard ()){
+			$this->session->set_flashdata('job_success','Added jobcard successfully!!'); 
+			redirect('Jobcard');
+		}
+		else{
+			$this->session->set_flashdata('job_failure','Sorry!! The jobcard no already exists!!'); 
+			redirect('Jobcard');
+		}
+		
 	}
 
 	

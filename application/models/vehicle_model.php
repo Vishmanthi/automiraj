@@ -11,10 +11,13 @@ class Vehicle_model extends CI_Model{
 			'veh_reg_no'=>$this->input->post('vehicleno'),
 			'type'=>$this->input->post('type'),
 			'make'=>$this->input->post('make'),
-			'model'=>$this->input->post('model'),
-			'additional'=>$this->input->post('additional')
+			'model'=>$this->input->post('model')
+		//	'additional'=>$this->input->post('additional')
 			
 		);
+		$db_debug = $this->db->db_debug; 
+
+        $this->db->db_debug = FALSE;  
 		$insert_data=$this->db->insert('vehicle',$data);
 		
 		if($insert_data){

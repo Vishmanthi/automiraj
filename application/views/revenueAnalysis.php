@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Cashier dashboard</title>
+	<title>Manager dashboard</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php include 'header.php';?>
@@ -20,31 +20,31 @@
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
         
-          ['Day', 'Body Wash', 'Engine Wash', 'exterior', 'Interior'],
+          ['Day', 'Body Wash', 'Wheel Alignment', 'Lubrication Service', 'Specialized services','Auto detailing','Average'],
           <?php 
         
           
-               echo "['". $weeklyRev1['date']."', ". $weeklyRev1['b001'] .","  . $weeklyRev1['e001']."," . $weeklyRev1['ex001'].",". $weeklyRev1['in001']."],";   
+               echo "['". $weeklyRev1['date']."', ". $weeklyRev1['b001'] .","  . $weeklyRev1['e001']."," . $weeklyRev1['ex001'].",". $weeklyRev1['in001']."," . $weeklyRev1['f001']."," . $weeklyRev1['avg']."],";   
     
           
-               echo "['". $weeklyRev2['date']."', ". $weeklyRev2['b001'] .","  . $weeklyRev2['e001']."," . $weeklyRev2['ex001'].",". $weeklyRev2['in001']."],";   
+               echo "['". $weeklyRev2['date']."', ". $weeklyRev2['b001'] .","  . $weeklyRev2['e001']."," . $weeklyRev2['ex001'].",". $weeklyRev2['in001']."," . $weeklyRev2['f001']."," . $weeklyRev2['avg']."],";   
            
            
-               echo "['". $weeklyRev3['date']."', ". $weeklyRev3['b001'] .","  . $weeklyRev3['e001']."," . $weeklyRev3['ex001'].",". $weeklyRev3['in001']."],";   
+               echo "['". $weeklyRev3['date']."', ". $weeklyRev3['b001'] .","  . $weeklyRev3['e001']."," . $weeklyRev3['ex001'].",". $weeklyRev3['in001']."," . $weeklyRev3['f001']."," . $weeklyRev3['avg']."],";   
            
             
-               echo "['". $weeklyRev4['date']."', ". $weeklyRev4['b001'] .","  . $weeklyRev4['e001']."," . $weeklyRev4['ex001'].",". $weeklyRev4['in001']."],";   
+               echo "['". $weeklyRev4['date']."', ". $weeklyRev4['b001'] .","  . $weeklyRev4['e001']."," . $weeklyRev4['ex001'].",". $weeklyRev4['in001']."," . $weeklyRev4['f001']."," . $weeklyRev4['avg']."],";   
              
             
-               echo "['". $weeklyRev5['date']."', ". $weeklyRev5['b001'] .","  . $weeklyRev5['e001']."," . $weeklyRev5['ex001'].",". $weeklyRev5['in001']."],";   
+               echo "['". $weeklyRev5['date']."', ". $weeklyRev5['b001'] .","  . $weeklyRev5['e001']."," . $weeklyRev5['ex001'].",". $weeklyRev5['in001']."," . $weeklyRev5['f001']."," . $weeklyRev5['avg']."],";   
             
           ?>  
         ]);
     
         var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
+          title : 'Revenue Analysis for the week',
+          vAxis: {title: 'Revenue'},
+          hAxis: {title: 'Date'},
           seriesType: 'bars',
           series: {5: {type: 'line'}}
         };
@@ -116,9 +116,10 @@
 			<a class="" onclick=""><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 		    <!-- <a class="" href="customers"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add Customer</a> -->
 		    <!-- <a class="" href="vehicle"><i class="fa fa-car" style="padding-right: 10px"></i>Add Vehicle</a> -->
-		    <a class="" href="<?php echo base_url(); ?>Manager/dailyServices"><i class="fa fa-file-text" style="padding-right: 10px"></i>Daily services analysis</a>
-			<a class="" href="<?php echo base_url(); ?>Manager/salesAnalysis"><i class="fa fa-file-text" style="padding-right: 10px"></i>Revenue analysis</a>
-		    <a class="" href="<?php echo base_url(); ?>Manager/dailySpares"><i class="fa fa-history" style="padding-right: 10px"></i>Spares usage</a>
+				<a class="" href="<?php echo base_url(); ?>Manager/dailyServices"><i class="fa fa-pie-chart" style="padding-right: 10px"></i>Daily services analysis</a>
+			<a class="" href="<?php echo base_url(); ?>Manager/salesAnalysis"><i class="fa fa-line-chart" style="padding-right: 10px"></i>Revenue analysis</a>
+		    <a class="" href="<?php echo base_url(); ?>Manager/dailySpares"><i class="fa fa-wrench" style="padding-right: 10px"></i>Spares usage</a>
+            <a class="" href="<?php echo base_url(); ?>Manager/addUser"><i class="fa fa-address-card-o" style="padding-right: 10px"></i>Add User</a>
 		</div>
 		
 		<div id="jobcard" class="content">

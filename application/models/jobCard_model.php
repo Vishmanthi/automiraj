@@ -10,7 +10,22 @@ class jobCard_model extends CI_Model
             'date'=>date("Y/m/d"),
             'odometer_read'=>$this->input->post("odometerR")
         );
+        
+       // $this->db->insert('jobcard',$data);
+       $db_debug = $this->db->db_debug; 
+
+        $this->db->db_debug = FALSE;  
+        
+        
         $insert_data=$this->db->insert('jobcard',$data);
+        // if($this->db->_error_message()){
+        //     return false;
+        // }
+        // $error = $this->db->error();
+        // if (isset($error['message'])) {
+        //     return false;
+        // }
+    
         $r=$this->db->query('select service_id,service_name from service');
         $r->result();
         $j_id=$this->input->post("jobcardno");
@@ -51,6 +66,7 @@ class jobCard_model extends CI_Model
             }
            
         }
+     return $insert_data;
     }
 
    

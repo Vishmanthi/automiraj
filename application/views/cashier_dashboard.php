@@ -108,7 +108,7 @@
 						</div>
 						<div class="w3-col m6">
 					
-            			<input class="dinput" type="text" id="cardno" name="vehno" placeholder="" value="<?php if (isset($jobid)){ echo $jobid;}?>" >
+            			<input class="dinput" type="text" id="cardno" name="vehno" placeholder="" value="<?php if (isset($vehno)){ foreach($vehno as $v){echo $v->vehicle_no;}}?>" >
             			
 					
 					</div>
@@ -117,7 +117,7 @@
 						<label for="cardno">Date</label>
 						</div>
 						<div class="w3-col m6">
-            			<input class="dinput" type="text" id="cardno" name="date" placeholder="" >
+            			<input class="dinput" type="text" id="cardno" name="date" placeholder="" value="<?php echo date('Y-m-d');?>" >
             			
 
 

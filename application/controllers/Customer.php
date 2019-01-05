@@ -84,29 +84,86 @@ class Customer extends CI_Controller {
 
 	public function Reservation(){
 		$this->load->model("customerDashboard_model");
+		$day=$this->input->post('res_date');
 		$userid=$this->session->user_id;
+		$time=$this->input->post("time");
+		
 		$data = array(
 			'cus_id'=> $userid,
 			'veh_no' => $this->input->post('veh_no'),
 			'reservation_date' => $this->input->post('res_date'),
 			'add_date' => date("Y/m/d"),
-			'title' => $this->input->post('title')
+			'title' => $this->input->post('title'),
+			'time_slot'=>$this->input->post('time')
+
 		);
+		// $this->customerDashboard_model->addReservation($data);
+		// $this->session->set_flashdata('reservation_success','Reservation Added Successfully!');
+		// redirect('index.php/customer/reserveService');
+		$resC=$this->customerDashboard_model->getRescount($day);
+		//print_r($resC);
+		if(!empty($resC)){
+			foreach($resC as $r){
+				if($r->time_slot==$time){
+					if($r->con<2){
+						$this->customerDashboard_model->addReservation($data);
+						$this->session->set_flashdata('reservation_success','Reservation Added Successfully!');
+						redirect('index.php/customer/reserveService');
+					}else{
+						$this->session->set_flashdata('reservation_failure','This time slot is anavailable on this day!');
+						redirect('index.php/customer/reserveService');
+					}
+				
+				}else{
+					$this->customerDashboard_model->addReservation($data);
+					 $this->session->set_flashdata('reservation_success','Reservation Added Successfully!');
+					redirect('index.php/customer/reserveService');
+			
+		}
+		}
+	}else{
 		$this->customerDashboard_model->addReservation($data);
-		$this->session->set_flashdata('reservation_success','Reservation Added Successfully!');
+		 $this->session->set_flashdata('reservation_success','Reservation Added Successfully!');
 		redirect('index.php/customer/reserveService');
+	}	
 	}
 
 	public function Reschedule(){
 		$this->load->model("customerDashboard_model");
 		$id= $this->input->post('id');
+		$day=$this->input->post('re_date');
+		$time=$this->input->post('time');
 		$data=array(
 			'title'=>$this->input->post('title'),
-			'reservation_date' => $this->input->post('re_date')
+			'reservation_date' => $this->input->post('re_date'),
+			'time_slot'=>$this->input->post('time')
 		);
+		$resC=$this->customerDashboard_model->getRescount($day);
+		if(!empty($resC)){
+			foreach($resC as $r){
+				if($r->time_slot==$time){
+					if($r->con<2){
+						$this->customerDashboard_model->RescheduleRes($id,$data);
+						$this->session->set_flashdata('reschedule_success','Rescheduled Successfully!');
+						redirect('index.php/customer/reserveService');
+					}else{
+						$this->session->set_flashdata('reservation_failure','This time slot is anavailable on this day!');
+						redirect('index.php/customer/reserveService');
+					}
+				
+				}else{
+					$this->customerDashboard_model->RescheduleRes($id,$data);
+					$this->session->set_flashdata('reschedule_success','Rescheduled Successfully!');
+					redirect('index.php/customer/reserveService');
+			
+				}
+			}
+	}else{
 		$this->customerDashboard_model->RescheduleRes($id,$data);
 		$this->session->set_flashdata('reschedule_success','Rescheduled Successfully!');
 		redirect('index.php/customer/reserveService');
+	}	
+
 	}
 
 	public function DeleteRes(){

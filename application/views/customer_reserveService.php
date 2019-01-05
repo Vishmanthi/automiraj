@@ -87,6 +87,17 @@
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
 		<div class="content" style="background: #f0f0f0" id="reserve-service">
 			<h2 class="mont" style="padding: 10px 20px 0;">Reserve Service</h2>
+
+					<p><?php if($this->session->flashdata('reservation_failure')): ?>
+				<div class="w3-panel w3-pale-red w3-display-container">
+				<span onclick="this.parentElement.style.display='none'"
+ 				class="w3-button w3-large w3-display-topright">&times;</span>
+				<h4>Sorry!!</h4>
+				<?php echo $this->session->flashdata('reservation_failure'); ?>
+				</div>
+				<?php endif; ?></p>
+
+		
 			<hr style="border-color: rgba(0,0,0,0.2);">
 			<div class="w3-row-padding">
 		    <div class="w3-col m10" style="border: 1px solid lightgrey;border-radius: 3px;margin-right: 16px">
@@ -170,14 +181,24 @@
 		</table>
 		</div>
 
-      <form class="w3-container" action="../customer/Reschedule" method="post">
+      <form class="w3-container" action="<?php echo base_url();?>customer/Reschedule" method="post">
         <div class="w3-section">
 		<label><b>Reservation id</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="id"  required>
           <label><b>Service</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required>
           <label><b>Reschedule To</b></label>
-          <input class="w3-input w3-border" type="text" placeholder="" name="re_date" required>
+          <input class="w3-input w3-border" type="text" placeholder="YYYY/mm/dd" name="re_date" required>
+					<label><b>Time Slot</b></label>
+					<select class="w3-select" name="time">
+  						<option value="0">Choose your option</option>
+  						<option value="7am to 9am">7am to 9am</option>
+  						<option value="9am to 11am">9am to 11am</option>
+  						<option value="11am to 1pm">11am to 1pm</option>
+							<option value="1pm to 3pm">1pm to 3pm</option>
+  						<option value="3pm to 5pm">3pm to 5pm</option>
+  						<option value="5pm to 7pm">5pm to 7pm</option>
+					</select>
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Reschedule</button>
         </div>
       </form>
@@ -196,7 +217,7 @@
         <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
       </div>
 
-      <form class="w3-container" action="Reservation" method="post">
+      <form class="w3-container" action="<?php echo base_url();?>Customer/Reservation" method="post">
         <div class="w3-section">
 		<label><b>Vehicle No</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="veh_no"  required>
@@ -204,6 +225,17 @@
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required>
           <label><b>Reserved Date</b></label>
           <input id="date" class="w3-input w3-border" type="text" placeholder="" name="res_date" required>
+					<label><b>Time Slot</b></label>
+					<select class="w3-select" name="time">
+  						<option value="0">Choose your option</option>
+  						<option value="7am to 9am">7am to 9am</option>
+  						<option value="9am to 11am">9am to 11am</option>
+  						<option value="11am to 1pm">11am to 1pm</option>
+							<option value="1pm to 3pm">1pm to 3pm</option>
+  						<option value="3pm to 5pm">3pm to 5pm</option>
+  						<option value="5pm to 7pm">5pm to 7pm</option>
+					</select>
+          
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Reserve</button>
         </div>
       </form>
