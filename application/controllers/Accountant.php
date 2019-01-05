@@ -1,12 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Accountant extends CI_Controller {
-	
+	function __construct() {
+        parent::__construct();
+        $this->load->model('accountant_model');
+    }
+	public function dashboard(){
+		$data['count']=$this->accountant_model->reorder_count();
+		$data['reorder']=$this->accountant_model->reorder_level();
+		$this->load->view('accountant_dashboard',$data);
+	}
 	public function manage_inventory(){
 		$this->load->view('accountant_inventory');
 	}
 	public function manage_supplier(){
-		$this->load->model('accountant_model');
+		
 		$data['supplierData']=$this->accountant_model->all_supplier();
 		$this->load->view("accountant_supplier",$data);
 	}
@@ -23,7 +31,7 @@ class Accountant extends CI_Controller {
 			'supplier_name' => $this->input->post('supp_name')
 		);
 		$qty=$this->input->post('qty');
-		$this->load->model('accountant_model');
+		
 		$this->form_validation->set_rules('item_code', 'Item code', 'required');
 		$this->form_validation->set_rules('brand', 'Brand name', 'required');
 		$this->form_validation->set_rules('qty', 'Quantity', 'required');
@@ -53,7 +61,7 @@ class Accountant extends CI_Controller {
 			'item_code' =>$this->input->post('item_code') , 
 			'brand' =>$this->input->post('brand')
 		);
-		$this->load->model('accountant_model');
+		
 		$this->form_validation->set_rules('item_code', 'Item code', 'required|callback_item_check');
 		$this->form_validation->set_rules('brand', 'Brand name', 'callback_item_check');
 		$this->form_validation->set_message('required', 'Required');
@@ -81,7 +89,7 @@ class Accountant extends CI_Controller {
 
 	}
 	public function reorder_level(){
-		$this->load->model('accountant_model');
+		
 		$reorder=$this->input->post('reorder');
 		$info=array(
 			'item_code'=>$this->input->post('item_code'),
@@ -102,7 +110,7 @@ class Accountant extends CI_Controller {
 
 	}
 	public function sellingPrice(){
-		$this->load->model('accountant_model');
+		
 		$info=array(
 			'item_code'=>$this->input->post('item_code'),
 			'brand'=>$this->input->post('brand')
@@ -124,7 +132,7 @@ class Accountant extends CI_Controller {
 		
 	}
 	public function search_stockid(){
-		$this->load->model('accountant_model');
+		
 		$id=$this->input->post('stockid');
 		$info=array(
 			'item_code'=>$this->input->post('item_code'),
@@ -144,7 +152,7 @@ class Accountant extends CI_Controller {
 		
 	}
 	public function edit_stock(){
-		$this->load->model('accountant_model');
+		
 		$info=array(
 			'item_code'=>$this->input->post('item_code'),
 			'brand'=>$this->input->post('brand')
@@ -170,7 +178,7 @@ class Accountant extends CI_Controller {
 	}
 
 	public function add_supplier(){
-		$this->load->model('accountant_model');
+		
 		$info=array(
 			'name'=>$this->input->post('sname'),
 			'no'=>$this->input->post('no1'),
@@ -200,35 +208,29 @@ class Accountant extends CI_Controller {
 				$this->session->set_flashdata('sup_err', "Error");
 			}
 		}
-		$this->load->view("accountant_supplier");
+		$data['supplierData']=$this->accountant_model->all_supplier();
+		$this->load->view("accountant_supplier",$data);
 	}
 	public function search_supplier(){
-		$this->load->model('accountant_model');
+		
 		$id=$this->input->post('s_id');
 		$name=$this->input->post('s_name');
 		if($id!=''){
 			$this->form_validation->set_rules('s_id', 'Supplier ID', 'callback_supplier_check1');
 			if ($this->form_validation->run() == true){
 				$data['supplier']=$this->accountant_model->search_supplier1($id);
-				$this->load->view('accountant_supplier',$data);
-			}
-			else{
-				$this->load->view('accountant_supplier');
+				$data['supstockData']=$this->accountant_model->supplier_stock1($id);
 			}
 		}
 		else if($name!=''){
 			$this->form_validation->set_rules('s_name', 'Supplier name', 'callback_supplier_check2');
 			if ($this->form_validation->run() == true){
 				$data['supplier']=$this->accountant_model->search_supplier2($name);
-				$this->load->view('accountant_supplier',$data);
-			}
-			else{
-				$this->load->view('accountant_supplier');
+				$data['supstockData']=$this->accountant_model->supplier_stock2($name);
 			}
 		}
-		else{
-			$this->load->view('accountant_supplier');
-		}
+		$data['supplierData']=$this->accountant_model->all_supplier();
+		$this->load->view('accountant_supplier',$data);
 		
 		
 	}
@@ -257,7 +259,7 @@ class Accountant extends CI_Controller {
 
 	}
 	public function update_supplier(){
-		$this->load->model('accountant_model');
+		
 		$info=array(
 			'no'=>$this->input->post('no'),
 			'lane1'=>$this->input->post('lane1'),
@@ -267,19 +269,18 @@ class Accountant extends CI_Controller {
 			'fax'=>$this->input->post('fax'),
 			'email'=>$this->input->post('email')
 		);
-		
+		$this->form_validation->set_rules('no', 'Number', 'required');
+		$this->form_validation->set_rules('lane1', 'Lane 1', 'required');
+		$this->form_validation->set_rules('city', 'City', 'required');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|min_length[10]|max_length[10]');
+		$this->form_validation->set_rules('fax', 'Fax', 'min_length[10]|max_length[10]');
+		$this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
+		$this->form_validation->set_message('min_length', 'minimum {param}');
+		$this->form_validation->set_message('max_length', 'maximum {param}');
+		$this->form_validation->set_message('valid_email', 'Invalid email');
+		$this->form_validation->set_message('required', 'Required');
 		if($this->input->post('s_name')!=''){
 			$name=$this->input->post('s_name');
-			$this->form_validation->set_rules('no', 'Number', 'required');
-			$this->form_validation->set_rules('lane1', 'Lane 1', 'required');
-			$this->form_validation->set_rules('city', 'City', 'required');
-			$this->form_validation->set_rules('phone', 'Phone', 'required|min_length[10]|max_length[10]');
-			$this->form_validation->set_rules('fax', 'Fax', 'min_length[10]|max_length[10]');
-			$this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
-			$this->form_validation->set_message('min_length', 'minimum {param}');
-			$this->form_validation->set_message('max_length', 'maximum {param}');
-			$this->form_validation->set_message('valid_email', 'Invalid email');
-			$this->form_validation->set_message('required', 'Required');
 			if ($this->form_validation->run() == true){
 				if($this->accountant_model->update_supplier2($info,$name)){
 					$this->session->set_flashdata('supUpsuc', "Supplier updated Successfully!");
@@ -287,28 +288,20 @@ class Accountant extends CI_Controller {
 				else{
 					$this->session->set_flashdata('supUperr', "Error");
 				}
-				$this->load->view('accountant_supplier');
+			
 
 			}
 			else{
 				$data['supplier']=$this->accountant_model->search_supplier2($name);
 				$data['name']=$name;
-				$this->load->view('accountant_supplier',$data);
+				$data['supstockData']=$this->accountant_model->supplier_stock2($name);
 			}
+			$data['supplierData']=$this->accountant_model->all_supplier();
+			$this->load->view('accountant_supplier',$data);
 			
 		}
 		else{
 			$id=$this->input->post('s_id');
-			$this->form_validation->set_rules('no', 'Number', 'required');
-			$this->form_validation->set_rules('lane1', 'Lane 1', 'required');
-			$this->form_validation->set_rules('city', 'City', 'required');
-			$this->form_validation->set_rules('phone', 'Phone', 'required|min_length[10]|max_length[10]');
-			$this->form_validation->set_rules('fax', 'Fax', 'min_length[10]|max_length[10]');
-			$this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
-			$this->form_validation->set_message('min_length', 'minimum {param}');
-			$this->form_validation->set_message('max_length', 'maximum {param}');
-			$this->form_validation->set_message('valid_email', 'Invalid email');
-			$this->form_validation->set_message('required', 'Required');
 			if ($this->form_validation->run() == true){
 				if($this->accountant_model->update_supplier1($info,$id)){
 					$this->session->set_flashdata('supUpsuc', "Supplier updated Successfully!");
@@ -316,14 +309,15 @@ class Accountant extends CI_Controller {
 				else{
 					$this->session->set_flashdata('supUperr', "Error");
 				}
-				$this->load->view('accountant_supplier');
+				
 			}
 			else{
 				$data['supplier']=$this->accountant_model->search_supplier1($id);
 				$data['id']=$id;
-				$this->load->view('accountant_supplier',$data);
+				$data['supstockData']=$this->accountant_model->supplier_stock1($id);
 			}
-			
+			$data['supplierData']=$this->accountant_model->all_supplier();
+			$this->load->view('accountant_supplier',$data);
 		}
 		
 	}

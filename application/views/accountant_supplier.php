@@ -31,16 +31,47 @@
 <body>
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
 		<div class="sidebar">
-			<a class="" onclick="" style="text-decoration: none;color: white;"><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
+			<a class="" href="dashboard" style="text-decoration: none;color: white;"><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 			<a class="" href="add_new" style="text-decoration: none"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add new Item </a>
 		    <a class="" href="manage_inventory" style="text-decoration: none"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Manage Inventory</a>
 		    <a class="" href="manage_supplier" style="text-decoration: none"><i class="fa fa-car" style="padding-right: 10px"></i>Manage Suppliers</a>
 		    <a class="" href="" style="text-decoration: none"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Reports</a>
 		    
 		</div>
-		<div class="content" style="background: #f0f0f0;height: 1000px;" id="inventory">
-			<h2 class="mont" style="padding: 10px 20px 0;">Manage Suppliers</h2>
+		<div class="content" style="background: #f0f0f0;height: auto;" id="inventory">
+			<h2 class="mont" style="padding: 25px 20px 0;">Manage Suppliers</h2>
 			<hr style="border-color: rgba(0,0,0,0.2);">
+			<div class="w3-row-padding" style="padding-top: 20px;padding-bottom: 20px;">
+				<div class="w3-col l12 m12" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;">
+					<h3 class="mont" style="padding: 20px 20px 15px;color: rgba(0,0,0,0.7);">All Suppliers Table</h3>
+					<table id="example1" class="table table-striped table-bordered" style="width:100%;margin: 10px 0 5px 0;">
+				        <thead>
+				            <tr>
+				            	<th>Supplier ID</th>
+				                <th>Supplier Name</th>
+				                <th>Address</th>
+				                <th>Phone</th>
+				                <th>Fax</th>
+				                <th>Email</th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				        	<?php if (isset($supplierData)){?>
+							<?php foreach ($supplierData as $row) {?>
+				        	<tr>
+				            	<td><?php echo $row->id ?></td>
+				                <td><?php echo $row->name ?></td>
+				                <td><?php echo $row->no; ?>,<?php echo $row->lane1; ?>,<?php if($row->lane2){echo $row->lane2; } ?>,<?php echo $row->city ?></td>
+				                <td><?php echo $row->phone ?></td>
+				                <td><?php echo $row->fax ?></td>
+				                <td><?php echo $row->email ?></td>
+				            </tr>
+				            <?php } ?>
+							<?php } ?>
+				        </tbody>
+				    </table>
+				</div>
+			</div>
 			<div class="w3-row-padding">
 				<div class="w3-col" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right:16px;width: 55%">
 					<h3 class="mont" style="padding: 20px 20px 7px;color: rgba(0,0,0,0.7);">Overview</h3>
@@ -111,7 +142,7 @@
 								<div class="w3-col" style="width: 50%;">
 									<label>Phone Number</label>
 								</div>
-								<div class="w3-col" style="width: 50%;color: red;margin-top: -15px;">
+								<div class="w3-col" style="width: 50%;color: red;margin-top: 0px;">
 									<?php echo form_error('phone'); ?>
 								</div>
 								<input class="w3-input w3-border w3-round" type="text" name="phone" placeholder="" value="<?php echo $row->phone ?>" style="width: 90%" onfocus="this.value=''">
@@ -120,7 +151,7 @@
 								<div class="w3-col" style="width: 50%;">
 									<label>Fax</label>
 								</div>
-								<div class="w3-col" style="width: 50%;color: red;margin-top: -15px;">
+								<div class="w3-col" style="width: 50%;color: red;margin-top: 0px;">
 									<?php echo form_error('fax'); ?>
 								</div>
 								<input class="w3-input w3-border w3-round" type="text" name="fax" placeholder="" value="<?php echo $row->fax ?>" style="width: 90%" onfocus="this.value=''">
@@ -132,7 +163,7 @@
 								<div class="w3-col" style="width: 50%;">
 									<label>Email</label>
 								</div>
-								<div class="w3-col" style="width: 50%;color: red;margin-top: -15px;">
+								<div class="w3-col" style="width: 50%;color: red;margin-top: 0px;">
 									<?php echo form_error('email'); ?>
 								</div>
 								<input class="w3-input w3-border w3-round" type="email" name="email" placeholder="" value="<?php echo $row->email ?>" style="width: 70%" onfocus="this.value=''">
@@ -237,7 +268,7 @@
 									<div class="w3-col" style="width: 40%">
 										<label>Phone <span style="color: red;"> *</span></label>
 									</div>
-									<div class="w3-col" style="width: 55%;margin-top: -10px;">
+									<div class="w3-col" style="width: 55%;margin-top: 0px;">
 										<span style="color: red;"><?php echo form_error('phone1'); ?></span>
 									</div>
 								</div>
@@ -267,29 +298,30 @@
 				</div>
 			</div>
 			
-			<div class="w3-row-padding" style="padding-top: 20px;">
+			<div class="w3-row-padding" style="padding-top: 20px;padding-bottom: 20px;">
 				<div class="w3-col l12 m12" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;">
-					<table id="example1" class="table table-striped table-bordered" style="width:100%">
+					<h3 class="mont" style="padding: 20px 20px 15px;color: rgba(0,0,0,0.7);">Supplier Stock Table</h3>
+					<table id="example2" class="table table-striped table-bordered" style="width:100%;margin: 10px 0 5px 0;">
 				        <thead>
 				            <tr>
-				            	<th>Supplier ID</th>
-				                <th>Supplier Name</th>
-				                <th>Address</th>
-				                <th>Phone</th>
-				                <th>Fax</th>
-				                <th>Email</th>
+				            	<th>Stock ID</th>
+				                <th>Date</th>
+				                <th>Item</th>
+				                <th>Brand</th>
+				                <th>Quantity added</th>
+				                <th>Purchase Price</th>
 				            </tr>
 				        </thead>
 				        <tbody>
-				        	<?php if (isset($supplierData)){?>
-							<?php foreach ($supplierData as $row) {?>
+				        	<?php if (isset($supstockData)){?>
+							<?php foreach ($supstockData as $row) {?>
 				        	<tr>
 				            	<td><?php echo $row->id ?></td>
-				                <td><?php echo $row->name ?></td>
-				                <td><?php echo $row->no ?><br><?php echo $row->lane1 ?><br><?php echo $row->lane2 ?><br><?php echo $row->city ?></td>
-				                <td><?php echo $row->phone ?></td>
-				                <td><?php echo $row->fax ?></td>
-				                <td><?php echo $row->email ?></td>
+				                <td><?php echo $row->date ?></td>
+				                <td><?php echo $row->item_code; ?></td>
+				                <td><?php echo $row->brand ?></td>
+				                <td><?php echo $row->quantity_added ?></td>
+				                <td><?php echo $row->purchase_price ?></td>
 				            </tr>
 				            <?php } ?>
 							<?php } ?>
@@ -311,6 +343,7 @@
 	}
 	$(document).ready(function() {
 	   $('#example1').DataTable();
+	   $('#example2').DataTable();
 	});
 </script>
 </html>

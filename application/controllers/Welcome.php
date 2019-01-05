@@ -31,4 +31,14 @@ class Welcome extends CI_Controller {
 		$this->load->view('home');
 		$this->load->view('customer_header2');
 	}
+	public function feed(){
+		$info=array(
+			'name'=>$this->input->post('name'),
+			'email'=>$this->input->post('email'),
+			'message'=>$this->input->post('message')
+		);
+		$this->load->model('model');
+		$this->model->feed($info);
+		redirect('welcome');
+	}
 }

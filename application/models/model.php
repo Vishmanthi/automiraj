@@ -1,6 +1,10 @@
 <?php
 class Model extends CI_Model
 {
+	function __construct() {
+		parent::__construct();
+        $this->load->database("");
+	}
 	public function insert_data($a,$b)
 	{
 		$this->load->database("");
@@ -32,6 +36,9 @@ class Model extends CI_Model
 			return false;
 		}
 
+	}
+	public function feed($info){
+		$this->db->insert('feedback', $info);
 	}
 }
 

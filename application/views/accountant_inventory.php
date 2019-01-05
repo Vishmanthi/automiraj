@@ -80,14 +80,14 @@
 <body>
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
 		<div class="sidebar">
-			<a class="" onclick="" style="color: white;"><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
+			<a class="" href="dashboard" style="color: white;text-decoration: none;"><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 			<a class="" href="add_new" style="text-decoration: none"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add new Item </a>
 		    <a class="" href="manage_inventory" style="text-decoration: none"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Manage Inventory</a>
 		    <a class="" href="manage_supplier" style="text-decoration: none"><i class="fa fa-car" style="padding-right: 10px"></i>Manage Suppliers</a>
 		    <a class="" href="" style="text-decoration: none"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Reports</a>
 		    
 		</div>
-		<div class="content" style="background: #f0f0f0;height: 1050px;" id="inventory">
+		<div class="content" style="background: #f0f0f0;height: auto;" id="inventory">
 			<h2 class="mont" style="padding: 25px 20px 0;">Manage Inventory</h2>
 			<hr style="border-color: rgba(0,0,0,0.2);">
 			<form method="post" action="../accountant/accountant_search">
