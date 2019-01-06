@@ -16,7 +16,7 @@ class Customer_model extends CI_Model{
 			$db_password=$result->row(0)->password;
 			$nicNo=$result->row(0)->id;
 			$arr = array($nicNo,$userType);
-			if(password_verify($password,$db_password)&&(($userType=='service adviser')||($userType=='customer')||($userType=='cashier')||($userType=='manager'))){
+			if(password_verify($password,$db_password)&&(($userType=='service adviser')||($userType=='accountant')||($userType=='customer')||($userType=='cashier')||($userType=='manager'))){
 				return $arr;
 				//return true;
 			}

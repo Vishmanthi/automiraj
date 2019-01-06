@@ -26,7 +26,7 @@ class Users extends CI_Controller{
 				$this->session->set_userdata($user_data);
 				if($login[1]=='service adviser'){
 					$this->session->set_flashdata('login_success','You are now logged in!!');
-					redirect('/customers');
+					redirect('/customers/customer');
 				}
 				elseif ($login[1]=='customer') {
 					$this->session->set_flashdata('login_success','You are now logged in!!');
@@ -39,6 +39,13 @@ class Users extends CI_Controller{
 				elseif ($login[1]=='manager') {
 					$this->session->set_flashdata('login_success','You are now logged in!!');
 					redirect('/Manager');
+				}
+				elseif($login[1]=='accountant'){
+					$this->session->set_flashdata('login_success','You are now logged in!!');
+					redirect('/accountant/dashboard');
+				}
+				else{
+					redirect('welcome');
 				}
 
 			}else{

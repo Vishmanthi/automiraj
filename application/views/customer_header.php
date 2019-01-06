@@ -29,13 +29,13 @@ body {font-family: "Lato", sans-serif}
 	    <a class="w3-bar-item w3-button w3-hide-small w3-hide-large w3-right buttonop" href="javascript:void(0)" onclick="navigation1()" title="Toggle Navigation Menu" style="padding: 13px 20px"><i class="fa fa-bars"></i></a>
 	    <img class="w3-bar-item" style="padding: 0px 0px;height:45px;width: 209px" src="<?php echo base_url(); ?>/assests/images/logo2.png">
 	    <div class="w3-right">
-	      <a href="../welcome/customer" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small " style="padding: 13px 16px">HOME</a>
-	      <a href="../welcome/customer#about" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">ABOUT US</a>
-	      <a href="../welcome#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">SERVICES</a>
-	      <a href="../welcome/customer#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow" style="padding: 13px 16px">CONTACT</a>
-	      <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">PROMOTIONS</a>
-	      <a href="../customer/reserveService" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px">DASHBOARD</a>
-	      <a href="<?php echo base_url(); ?>users/logout" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small" style="padding: 13px 16px;width: auto;">LOGOUT</a>
+	      <a href="../welcome/customer" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small " style="padding: 13px 16px;text-decoration: none">HOME</a>
+	      <a href="../welcome/customer#about" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px;text-decoration: none">ABOUT US</a>
+	      <a href="../welcome#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px;text-decoration: none">SERVICES</a>
+	      <a href="../welcome/customer#contact" class="w3-bar-item w3-button  w3-hide-small w3-hover-yellow" style="padding: 13px 16px;text-decoration: none">CONTACT</a>
+	      <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px;text-decoration: none">PROMOTIONS</a>
+	      <a href="../customer/reserveService" class="w3-bar-item w3-button w3-hide-small w3-hover-yellow w3-hide-medium" style="padding: 13px 16px;text-decoration: none">DASHBOARD</a>
+	      <a href="<?php echo base_url(); ?>users/logout" class="w3-bar-item w3-button w3-hover-yellow w3-hide-small" style="padding: 13px 16px;width: auto;text-decoration: none">LOGOUT</a>
 	      
 	    </div>
 	  </div>

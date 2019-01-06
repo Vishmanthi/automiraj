@@ -16,16 +16,17 @@ body {font-family: "Lato", sans-serif}
   font-size: 17px;
   border: none;
 }
+a {text-decoration: none;}
 </style>
 <body>
 
 	<div class="w3-top">
   		<div class="w3-bar w3-card w3-black" style="opacity: 1.0">
 		    <img class="w3-bar-item" style="padding: 0px 0px;height:45px;width: 209px" src="<?php echo base_url(); ?>/assests/images/logo2.png">
-		    <div class="w3-right">
-		      	<a href="#contact" class="w3-bar-item buttonop" style="padding: 13px 11px"><i class="fa fa-user-circle-o" style="padding-right: 3px;color: white;"></i><i class="fa fa-caret-down" style="color: white"></i></a>
+		    <div class="w3-right w3-bar-item buttonop" style="padding: 13px;color: white;text-decoration: none;">
+				<a href="../users/logout" style="color: white;text-decoration: none;">LOGOUT</a>
 	      	</div>
-	      	<a href="#contact" class="w3-bar-item w3-left buttonop" style="padding: 13px 15px"><i class="fa fa-bars"></i></a>
+	      	<a href="" class="w3-bar-item w3-left buttonop" style="padding: 13px 15px"><i class="fa fa-bars" style="color: white"></i></a>
 	      	
 		</div>
 	</div>
