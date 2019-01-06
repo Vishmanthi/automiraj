@@ -150,7 +150,7 @@ public function regUser(){
     //$this->form_validation->set_rules('nic','ID Number','trim|required|regex_match[/[0-9]{12}|[0-9]{9}[V]/]');
     $this->form_validation->set_rules('nic','NIC No','trim|required|callback_valid_nic');
     // $this->form_validation->set_rules('phone','Phone Number','trim|required|exact_length[10]');
-    // $this->form_validation->set_rules('email','Email','trim|required|valid_email');
+     $this->form_validation->set_rules('email','Email','trim|required|valid_email');
      $this->form_validation->set_rules('pwd','Password','trim|required');
      $this->form_validation->set_rules('cpwd','Confirm Password','trim|required|matches[pwd]');
     

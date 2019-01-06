@@ -190,6 +190,14 @@ input[type=submit]:hover {
     </div>
     <div class="row">
       <div class="col-25">
+        <label for="lname">Email</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="lname" name="email" placeholder="Email Address..">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
         <label for="lname">NIC No</label>
       </div>
       <div class="col-75">

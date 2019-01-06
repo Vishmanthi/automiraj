@@ -31,6 +31,7 @@ class JobCard extends CI_Controller{
 		else{
 			$this->session->set_flashdata('job_failure','Sorry!! The jobcard no already exists!!'); 
 			redirect('Jobcard');
+			//$this->load->view('jobcard_view');
 		}
 		
 	}

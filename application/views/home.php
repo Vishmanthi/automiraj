@@ -140,8 +140,15 @@ span.psw {
 }
 </style>
 <body>
+
+
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:49px;">
+<p class="w3-panel w3-yellow">
+      <?php if($this->session->flashdata('login_fail')):?>
+      <?php echo $this->session->flashdata('login_fail');?>
+      <?php endif;?>
+      </p>
 
   <!-- Automatic Slideshow Images -->
   <div class="mySlides w3-display-container w3-center" id="div1">
@@ -206,18 +213,22 @@ span.psw {
   
   <form class="modal-content animate" action="users/login" method="post" style="width:460px;background-color: rgba(0,0,0,0.68);border-radius: 3%">
     <div class="imgcontainer" style="height:150px;">
-      <p class="w3-red">
+      <!-- <p class="w3-panel w3-yellow">
       <?php if($this->session->flashdata('errors')):?>
       <?php echo $this->session->flashdata('errors');?>
       <?php endif;?>
-      </p>
+      </p> -->
       <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="<?php echo base_url(); ?>/assests/images/log2.png" alt="Avatar" style="border-radius: 50%">
       <div class="w3-center mont" style="font-size: 40px;color: white">
         LOGIN
       </div>
     </div>
-    
+    <p class="w3-panel w3-yellow">
+      <?php if($this->session->flashdata('errors')):?>
+      <?php echo $this->session->flashdata('errors');?>
+      <?php endif;?>
+      </p>
     <div class="container" >
       <label for="uname" style="color: white">Username</label>
       <input style="background:rgba(0,0,0,0.6);color: rgba(255,255,255,0.7);" type="text" placeholder="Enter Username" name="username" required>
@@ -225,10 +236,10 @@ span.psw {
       <label for="psw" style="color: white">Password</label>
       <input style="background:rgba(0,0,0,0.6); color: rgba(255,255,255,0.7);" type="password" placeholder="Enter Password" name="password" required>
       <div style="margin-top: 15px">
-        <label style="color: rgba(255,255,255,0.8);">
+        <!-- <label style="color: rgba(255,255,255,0.8);">
           <input type="checkbox" checked="checked" name="remember" style="cursor: pointer;"> Remember me
-        </label>
-        <span class="psw" style="color: rgba(255,255,255,0.8);">Forgot <a href="#">password?</a></span>
+        </label> -->resetPass
+        <span class="psw" style="color: rgba(255,255,255,0.8);">Forgot <a href="<?php echo base_url();?>users/resetPassword">password?</a></span>
       </div>
     </div>
   
