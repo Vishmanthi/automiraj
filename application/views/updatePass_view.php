@@ -5,7 +5,7 @@ body {
   font-family: Arial;
 }
 
-input[type=text], select {
+input[type=text],input[type=password], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -39,7 +39,7 @@ div.container {
 <body>
 
 <h3>Update Your Password</h3>
-<p>How to use CSS to create a stacked form:</p>
+<!-- <p>How to use CSS to create a stacked form:</p> -->
 
 <div class="container">
   <form action="<?php echo base_url();?>users/update_password" method="post">
@@ -55,12 +55,12 @@ div.container {
     <label for="fname">New Password</label>
     <input type="password" id="fname" name="password" placeholder="Your name..">   
 
->
+
     <label for="fname">New Password Again</label>
     <input type="password" id="fname" name="password_conf" placeholder="Your name..">   
   
   
-    <input type="submit" value="Submit">
+    <input type="submit" value="Change">
   </form>
   <?php echo validation_errors();?>
 </div>

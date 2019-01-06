@@ -247,7 +247,37 @@ public function regUser(){
             $this->form_validation->set_message('valid_nic', 'The NIC No is not in the correct format');
             return FALSE;
          }
-     } 
+     }
+     
+     
+     public function sentPromotions(){
+        $this->load->view("addPromotions");
+
+    }
+    public function getdataPromotions(){
+        $Item= $_POST["Item"];
+            $Brand= $_POST["Brand"];
+            $Promotion= $_POST["Promotion"];
+            $this->load->Model('promotionModel');
+            $this->promotionModel->getPromotions($Item,$Brand,$Promotion);
+            $this->load->view("addPromotions");
+           }
+    public function getdataPromotions1(){
+        $this->load->Model('promotionModel');
+        $result=$this->promotionModel->getData();
+        return $result;
+    }
+    public function loadPromotionSection(){
+        $data["list"]=$this->getdataPromotions1();
+        $this->load->view("home",$data);
+    }
+    public function deletPromotion(){
+        $Id =$_POST['cord'];
+        $this->load->Model('promotionModel');
+        $this->promotionModel->deleteData($Id);
+        $this->load->view("home");
+    }
+
 
 }
 

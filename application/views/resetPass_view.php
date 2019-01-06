@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body class="w3-container">
+
 <style>
 body {
   font-family: Arial;
@@ -36,10 +40,10 @@ div.container {
   padding: 20px;
 }
 </style>
-<body>
+
 
 <h3>Reset Password</h3>
-<p>How to use CSS to create a stacked form:</p>
+<!-- <p>How to use CSS to create a stacked form:</p> -->
 
 <div class="container">
   <form action="<?php echo base_url();?>users/resetPassword" method="post">
@@ -48,12 +52,12 @@ div.container {
 
     
   
-    <input type="submit" value="Submit">
+    <input type="submit" value="Send">
   </form>
   <?php 
   echo validation_errors();
   if (isset($error)){
-      echo $error;
+      echo "<p >".$error."</p>";
   }
       ?>
   

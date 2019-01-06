@@ -144,11 +144,11 @@ span.psw {
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:49px;">
-<p class="w3-panel w3-yellow">
+<!-- <p class="w3-panel w3-yellow">
       <?php if($this->session->flashdata('login_fail')):?>
       <?php echo $this->session->flashdata('login_fail');?>
       <?php endif;?>
-      </p>
+      </p> -->
 
   <!-- Automatic Slideshow Images -->
   <div class="mySlides w3-display-container w3-center" id="div1">
@@ -171,6 +171,40 @@ span.psw {
     <hr/>
     <p class="w3-justify">To achieve unparalleled recognition as the premium auto care service provider by objectifying trust, convenience and uniqueness. Guiding our work force as a team striving “To become the obvious choice”.</p>
   </div>
+
+<!-- Promotion section -->
+<div class="w3-container w3-content w3-padding-64 w3-center" style="max-width:800px;" id="promotion">
+    <div class="w3-yellow w3-hover-amber w3-center "style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+      <h2 class="mukta" style="font-weight: 600;padding:5px 20px; text-align:left; "><i>Promotions</i></h2>
+  </div>
+      <h3>Our offers uptodate</h3>
+      <hr>
+ <table  class="table table-hover"width="500",align="center">
+  <tr>
+    <th>ITEM</th>
+    <th>BRAND</th> 
+    <th>DISCOUNT</th>
+    <th>DIS_CORD</th>
+    
+    
+  </tr>
+<?php
+    if(isset($list)){
+    foreach ($list as $row){
+        echo "<tr>
+                <td>".$row->Item."</td>
+                <td>".$row->Brand."</td>
+                <td>".$row->Promotion."</td>
+                <td>".$row->Id."</td>
+                
+                </tr>";
+    }  
+    }
+    echo "</table>"
+ ?>
+ 
+
+
   <!-- The Contact Section -->
   <div class="w3-container w3-content w3-padding-64 " style="max-width:800px;" id="contact">
     <div class="w3-yellow w3-hover-amber w3-center "style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
@@ -225,11 +259,11 @@ span.psw {
         LOGIN
       </div>
     </div>
-    <p class="w3-panel w3-yellow">
+    <!-- <p class="w3-panel w3-yellow">
       <?php if($this->session->flashdata('errors')):?>
       <?php echo $this->session->flashdata('errors');?>
       <?php endif;?>
-      </p>
+      </p> -->
     <div class="container" >
       <label for="uname" style="color: white">Username</label>
       <input style="background:rgba(0,0,0,0.6);color: rgba(255,255,255,0.7);" type="text" placeholder="Enter Username" name="username" required>
@@ -239,7 +273,7 @@ span.psw {
       <div style="margin-top: 15px">
         <!-- <label style="color: rgba(255,255,255,0.8);">
           <input type="checkbox" checked="checked" name="remember" style="cursor: pointer;"> Remember me
-        </label> -->resetPass
+        </label> -->
         <span class="psw" style="color: rgba(255,255,255,0.8);">Forgot <a href="<?php echo base_url();?>users/resetPassword">password?</a></span>
       </div>
     </div>

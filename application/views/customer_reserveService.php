@@ -186,7 +186,16 @@
 		<label><b>Reservation id</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="id"  required>
           <label><b>Service</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required>
+					<select class="w3-select w3-input w3-border w3-margin-bottom" name="title">
+  						<option value="0">Choose your option</option>
+  						<option value="Body Wash">Body Wash</option>
+  						<option value="Wheel Alignment">Wheel Alignment</option>
+  						<option value="Lubrication Service">Lubrication Service</option>
+							<option value="Auto Detailing">Auto Detailing</option>
+  						<option value="Specialized services">Specialized services</option>
+  						
+					</select>
+          <!-- <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required> -->
           <label><b>Reschedule To</b></label>
           <input class="w3-input w3-border" type="text" placeholder="YYYY/mm/dd" name="re_date" required>
 					<label><b>Time Slot</b></label>
@@ -222,7 +231,16 @@
 		<label><b>Vehicle No</b></label>
           <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="veh_no"  required>
           <label><b>Service</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required>
+					<select class="w3-select w3-input w3-border w3-margin-bottom" name="title">
+  						<option value="0">Choose your option</option>
+  						<option value="Body Wash">Body Wash</option>
+  						<option value="Wheel Alignment">Wheel Alignment</option>
+  						<option value="Lubrication Service">Lubrication Service</option>
+							<option value="Auto Detailing">Auto Detailing</option>
+  						<option value="Specialized services">Specialized services</option>
+  						
+					</select>
+          <!-- <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="" name="title" required> -->
           <label><b>Reserved Date</b></label>
           <input id="date" class="w3-input w3-border" type="text" placeholder="" name="res_date" required>
 					<label><b>Time Slot</b></label>

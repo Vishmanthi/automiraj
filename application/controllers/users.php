@@ -70,7 +70,7 @@ class Users extends CI_Controller{
 				$result=$this->customer_model->email_exists($email);
 				if($result){
 					$this->send_reset_password_email($email,$result);
-					//$this->load->view('view_reset_password_sent',array('email'=>$email));
+					$this->load->view('view_reset_password_sent',array('email'=>$email));
 
 				}else{
 					$this->load->view('resetPass_view',array('error'=>'Email Address not registered!!'));
@@ -82,12 +82,7 @@ class Users extends CI_Controller{
 	}
 
 	private function send_reset_password_email($email,$username){
-		// stream_context_set_default([
-		// 	'ssl'=>[
-		// 		'verify_peer'=>false,
-		// 		'verify_peer_name'=>false,
-		// 	]
-		// ]);
+		
 
  		$config = Array(
 			'protocol' => 'smtp',
@@ -102,7 +97,7 @@ class Users extends CI_Controller{
 		$this->load->library('email',$config);
 		$email_code=md5($this->config->item('salt').$username);
 		$this->email->set_mailtype('html');
-		$this->email->from('vishmanthifernando@gmail.com','Freight Forum');
+		$this->email->from('vishmanthifernando@gmail.com','Auto Miraj');
 		$this->email->to($email);
 		$this->email->subject('Please reset your password');
 		$message="<!DOCTYPE html>
@@ -111,7 +106,7 @@ class Users extends CI_Controller{
 		<meta name='viewport' content='width=device-width, initial-scale=1>
 		<link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>
 		<body>";
-		$message.="<p>Dear".$username."</p>";
+		$message.="<p>Dear ".$username."</p>";
 		$message.="<p>We want to help you to reset your password!!Please<strong><a href='".base_url()."users/reset_password_form/".$email."/".$email_code."'>Click here</a></strong> to reset your password</p>";
 		$message.="<p>Thank you</p>";
 		$message.="<p>The Auto Miraj Team</p>";

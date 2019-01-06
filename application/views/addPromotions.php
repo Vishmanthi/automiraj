@@ -153,109 +153,39 @@ input[type=submit]:hover {
         
 		<hr/>
 		<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: #f0f0f0;">
-		<h2>Add users to the System</h2>
-            
-        
-<!-- <p>Resize the browser window to see the effect. When the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other.</p> -->
-
-<div class="container">
-<div class="w3-panel w3-pale-red w3-display-container">
-                <?php if($this->session->flashdata('errors')):?>
-                <?php echo $this->session->flashdata('errors');?>
-                <?php endif;?>
-                <?php if($this->session->flashdata('nErr')):?>
-                <?php echo $this->session->flashdata('nErr');?>
-                <?php endif;?>
-			</div>
-			
-			<p class="w3-light-green">
-        	<?php if($this->session->flashdata('cusReg_success')):?>
-        	<?php echo $this->session->flashdata('cusReg_success');?>
-        	<?php endif;?>
-        	</p>
-  <form action="<?php echo base_url();?>Manager/regUser" method="post">
-    <div class="row">
-      <div class="col-25">
-        <label for="fname">First Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="fname" name="firstname" placeholder="First name..">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Last Name</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="lname" name="lastname" placeholder="Last name..">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Email</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="lname" name="email" placeholder="Email Address..">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">NIC No</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="lname" name="nic" placeholder="Nic no..">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="country">User Type</label>
-      </div>
-      <div class="col-75">
-        <select id="country" name="type">
-        <option value="">select type</option>
-          <option value="service adviser">service adviser</option>
-          <option value="cashier">cashier</option>
-          <option value="accountant">accountant</option>
-          <option value="manager">manager</option>
-         
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Username</label>
-      </div>
-      <div class="col-75">
-        <input type="text" id="lname" name="username" placeholder="Enter user name..">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Password</label>
-      </div>
-      <div class="col-75">
-        <input type="password" id="lname" name="pwd" placeholder="">
-      </div>
-    </div> 
-    <div class="row">
-      <div class="col-25">
-        <label for="lname">Confirm Password</label>
-      </div>
-      <div class="col-75">
-        <input type="password" id="lname" name="cpwd" placeholder="">
-      </div>
-    </div>
-    <div class="row">
-      <input type="submit" value="Submit">
-    </div>
-  </form>
+<h1>Create Promotions</h1>
+<form action="<?php echo base_url();?>Manager/getdataPromotions" method="POST" >
+          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+            <div class = "row">
+                <div class="w3-half">
+                    <p><h3>Item</h3> <input class="w3-input w3-border" type="text" placeholder="spare item" required name="Item" required></p>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="w3-half">
+                    <p><h3>Brand</h3><input class="w3-input w3-border" type="text" placeholder="product brand" required name="Brand" required></p>
+                    </div>
+                 </div>
+            <div class="row">  
+                <div class="w3-half">    
+                    <p><h3>Promotion</h3><input class="w3-input w3-border" type="text" placeholder="discount or promotion" required name="Promotion" required></p>
+                </div>
+            </div>
+            <button class="w3-btn w3-black w3-hover-green w3-section w3-center w3-hover-shadow" type="submit">SEND</button>
+        </form>
 </div>
-
-		
-		</div>
-	</div>
-	</div>
+<div class="container">
+    <form action="<?php echo base_url();?>Manager/deletPromotion" method="POST">
+    <div class = "row">
+                <div class="w3-half">
+                    <p><h3>Enter DIS_CORD</h3> <input class="w3-input w3-border" type="text" placeholder="cord no." required name="cord" required></p>
+                </div>
+            </div>
+            <input type='submit' class='btn btn-danger' value='Delete'>
+    </form>
+</div>
+</div>
 	
 
-</body>
-</html>
+    </body>
+    </html>
