@@ -188,19 +188,20 @@ span.psw {
       <div class="w3-col m6">
         <h3 style="text-align: left; font-weight: 400; padding-top:15px;">Let's get in touch!</h3>
         <hr/>
-        <p>Feel free to contact us for more information or get in touch with our customer care executives at our office.</p>
-        <form action="/action_page.php" target="_blank">
+        <p>Feel free to contact us for more information or get in touch with our customer care at our office.</p>
+        <form action="welcome/feed" method="post" id="feedback" autocomplete="off">
           <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
             <div class="w3-half">
-              <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+              <input class="w3-input w3-border" type="text" placeholder="Name" name="name" onfocus="this.value=''" required>
             </div>
-            <div class="w3-half">
-              <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+            <div class="w3-half" style="margin-top: 9px;">
+              <input class="w3-input w3-border" type="email" placeholder="Email" style="padding:12px;border-radius: 5px;" name="email" onfocus="this.value=''" required>
             </div>
           </div>
-          <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+          <textarea class="w3-input w3-border" form="feedback" placeholder="Message" name="message" required onfocus="this.value=''"></textarea>
           <button class="w3-btn w3-black w3-hover-green w3-section w3-center w3-hover-shadow" type="submit">SEND</button>
         </form>
+
       </div>
     </div>
   </div>

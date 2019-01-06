@@ -28,7 +28,7 @@
 <body>
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
 		<div class="sidebar">
-			<a class="" onclick=""><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
+			<a class="" href="dashboard" style="text-decoration: none;color: white;"><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 			<a class="" href="add_new"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add new Item </a>
 		    <a class="" href="manage_inventory"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Manage Inventory</a>
 		    <a class="" href="manage_supplier"><i class="fa fa-car" style="padding-right: 10px"></i>Manage Suppliers</a>

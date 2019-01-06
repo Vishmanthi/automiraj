@@ -1,6 +1,6 @@
 <?php
 class Vehicle extends CI_Controller{
-	public function index(){
+	public function vehicle_view(){
 		$data['main_view']="addVehicle_view";
 		$this->load->model("customer_model");
 		$data['cus_det']=$this->customer_model->find_customer();
@@ -17,7 +17,8 @@ class Vehicle extends CI_Controller{
             );
         $this->session->set_flashdata($data);
 	 	//$this->load->view('addVehicle_view',$a);
-	 	redirect('index.php/vehicle');
+	 	$data['cus_det']=$this->customer_model->find_customer();
+		$this->load->view('addVehicle_view',$data);
 		
 
 	}
@@ -36,24 +37,25 @@ class Vehicle extends CI_Controller{
             		'errors'=>validation_errors()
             );
             $this->session->set_flashdata($data);
-            redirect('index.php/vehicle');
+            
 
 	 	}else{
 	 		$this->load->model('vehicle_model');
 	 		if($this->vehicle_model->create_vehicle()){
 				$this->session->set_flashdata('vehReg_success','Vehicle added!!');
-				redirect('index.php/vehicle');
-			 }else{
+				
+			}else{
 				$this->session->set_flashdata('vehReg_failure','The added vehicle is already regitered!!');
-				redirect('index.php/vehicle');
-			 }
-			 }
+				
+			}
 			
-			 // }else{
-			 // 	echo "something wrong";
-			 // }
+		}
+		$this->load->model("customer_model");
+	 	$data['cus_det']=$this->customer_model->find_customer();
+		$this->load->view('addVehicle_view',$data);	
+			 
 			
-	 	} 
+	} 
 
 	
 }

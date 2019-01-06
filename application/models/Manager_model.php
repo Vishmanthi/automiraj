@@ -41,6 +41,29 @@ public function getDailySales($date){
         return $r->result();
     }
 
+    public function customercare(){
+        $this->load->database("");
+        $this->db->select("*");
+        $this->db->from('feedback');
+        $result = $this->db->get();
+        return $result->result();
+    }
+    public function customer_count(){
+        $this->load->database("");
+        $this->db->select("*");
+        $this->db->from('feedback');
+        $result = $this->db->get();
+        return $result->num_rows();
+    }
+    public function removeMessage($name,$email,$message){
+        $this->load->database("");
+        $this->db->where('name', $name);
+        $this->db->where('email', $email);
+        $this->db->where('message', $message);
+        $this->db->delete('feedback');
+    }
+
+
     public function create_employee(){
 		$this->load->database("");
 		$data=array(
@@ -75,5 +98,6 @@ public function getDailySales($date){
 		}
 	}
  
+
 } 
 ?>

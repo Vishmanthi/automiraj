@@ -56,7 +56,7 @@ class Customer extends CI_Controller {
 	public function editProfileDetails(){
 		$this->load->model("customerDashboard_model");
 		$nic= $this->input->post('nic');
-		$data = array(
+		$dat = array(
 			'title' => $this->input->post('title'),
 			'first_name' => $this->input->post('fname'),
 			'last_name' => $this->input->post('lname'),
@@ -64,16 +64,53 @@ class Customer extends CI_Controller {
 			'email' => $this->input->post('email'),
 			'address' => $this->input->post('add')
 		);
-		$this->customerDashboard_model->editProfile($nic,$data);
-		$this->session->set_flashdata('customerUpdate_success','Details Updated!');
-		redirect('index.php/customer/editProfile');
+		$this->form_validation->set_rules('fname', 'First Name', 'required');
+		$this->form_validation->set_rules('lname', 'Last Name', 'required');
+		$this->form_validation->set_rules('cno', 'Phone', 'required|min_length[10]|max_length[10]');
+		$this->form_validation->set_rules('email', 'First Name', 'trim|valid_email');
+		$this->form_validation->set_rules('add', 'Address', 'required');
+		$this->form_validation->set_message('required', 'Required');
+		$this->form_validation->set_message('min_length', 'minimum {param}');
+		$this->form_validation->set_message('max_length', 'maximum {param}');
+		$this->form_validation->set_message('valid_email', 'Invalid email');
+		if ($this->form_validation->run() == true){
+			if($this->customerDashboard_model->editProfile($nic,$dat)){
+				$this->session->set_flashdata('customerUpdate_success','Details Updated!');
+			}
+			else{
+				$this->session->set_flashdata('customerUpdate_error','Error!');
+				
+			}
+		}
+		$data['cusData']=$this->customerDashboard_model->getCustomerData1($nic);
+		$this->load->view('customer_editProfile',$data);
+		
+		
+		
+		
+		
 	}
 	public function changePassword(){
 		$this->load->model("customerDashboard_model");
 		$old=$this->input->post('old');
-		$encripted_new=password_hash($this->input->post('new'),PASSWORD_BCRYPT);
-		$this->customerDashboard_model->changePassword($old,$encripted_new);
-		redirect('index.php/customer/editProfile');
+		$nic= $this->input->post('nic');
+		
+		$this->form_validation->set_rules('old', 'Old Password', 'required');
+		$this->form_validation->set_rules('new', 'New Password', 'required');
+		$this->form_validation->set_rules('repNew', 'Repeat New Password', 'required|matches[new]');
+		$this->form_validation->set_message('required', 'Required');
+		$this->form_validation->set_message('matches', 'Does not match password');
+		if ($this->form_validation->run() == true){
+			$encripted_new=password_hash($this->input->post('new'),PASSWORD_BCRYPT);
+			if($this->customerDashboard_model->changePassword($old,$encripted_new)){
+				$this->session->set_flashdata('pass_success','Password Changed!');
+			}
+			else{
+				$this->session->set_flashdata('pass_error','Error!');
+			}
+		}
+		$data['cusData']=$this->customerDashboard_model->getCustomerData1($nic);
+		$this->load->view('customer_editProfile',$data);
 	}
 	public function getServiceHistory(){
 		$this->load->model("customerDashboard_model");

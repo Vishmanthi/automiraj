@@ -142,6 +142,66 @@ public function dailySpares(){
     $this->load->view('dailySparesUsage',$data); 
 }
 
+public function customercare(){
+    $this->load->model('manager_model');
+    $data['count']=$this->manager_model->customer_count();
+    $data['cus']=$this->manager_model->customercare();
+    $this->load->view('manager_cc',$data);
+}
+public function removeMessage(){
+    $this->load->model('manager_model');
+    $name=$this->input->post("name");
+    $email=$this->input->post("email");
+    $message=$this->input->post("message");
+    $this->manager_model->removeMessage($name,$email,$message);
+    $data['count']=$this->manager_model->customer_count();
+    $data['cus']=$this->manager_model->customercare();
+    $this->load->view('manager_cc',$data);
+}
+public function email(){
+    $this->load->model('manager_model');
+    $to=$this->input->post("to");
+    $subject=$this->input->post("subject");
+    $message=$this->input->post("message");
+    $this->form_validation->set_rules('to', 'To', 'required');
+    $this->form_validation->set_rules('message', 'Message', 'required');
+    $this->form_validation->set_message('required', 'Required');
+    if ($this->form_validation->run() == true){
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'sasini.vidarshi14@gmail.com',
+            'smtp_pass' => 'sasinisumudu',
+            'mailtype'  => 'html', 
+            'charset'   => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+
+        // Set to, from, message, etc.
+        $this->email->from('sasini.vidarshi14@gmail.com', 'Manager Automiraj');
+        $this->email->to($to); 
+
+        $this->email->subject($subject);
+        $this->email->message($message); 
+
+        $result = $this->email->send();
+        if($result){
+            $this->session->set_flashdata('success', "Email sent Succesfully!");
+        }
+        else{
+            $this->session->set_flashdata('error', "Error occured sending email!");
+        }
+    }
+    $data['count']=$this->manager_model->customer_count();
+    $data['cus']=$this->manager_model->customercare();
+    $this->load->view('manager_cc',$data);
+    
+
+}
+
+
 public function regUser(){
     // $nic= $this->input->post("nic");
     // $this->valid_nic($nic);
@@ -188,6 +248,7 @@ public function regUser(){
             return FALSE;
          }
      } 
+
 }
 
 ?>

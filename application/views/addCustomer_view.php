@@ -16,12 +16,12 @@
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
 		<div class="sidebar">
 			<a class="" onclick=""><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
-		    <a class="" href="customers"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add Customer</a>
-		    <a class="" href="vehicle"><i class="fa fa-car" style="padding-right: 10px"></i>Add Vehicle</a>
-		    <a class="" href="jobCard"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Job card</a>
-		    <a class="" href="serviceHistory"><i class="fa fa-history" style="padding-right: 10px"></i>View Service history</a>
+		    <a class="" href="../customers/customer"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add Customer</a>
+		    <a class="" href="../vehicle/vehicle_view"><i class="fa fa-car" style="padding-right: 10px"></i>Add Vehicle</a>
+		    <a class="" href="../jobCard/job"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Job card</a>
+		    <a class="" href="../serviceHistory/servicehist"><i class="fa fa-history" style="padding-right: 10px"></i>View Service history</a>
 		</div>
-		<div id="customer" class="content">
+		<div id="customer" class="content" style="background-color: #f0f0f0;">
 			<h2 style="padding: 20px 20px 7px;">Register Customer</h2> 
 			<hr/>
 			<div class="w3-pale-red">
@@ -40,8 +40,8 @@
         	<?php endif;?>
         	</p>
 			
-			<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: #f0f0f0;">
-				<form action="customers/register" method="post">
+			<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: white;">
+				<form action="../customers/register" method="post">
 					<div class="w3-row">
 						<div class="w3-col m6">
 							<label for="cardno">Title</label>
@@ -72,7 +72,7 @@
 					</div>
 				
 							
-					<button class="button-green" type="submit" style="width: 20%;margin-top: 20px;"><i class="fa fa-plus"></i>Register</button> 
+					<button class="button-green" type="submit" style="width: 20%;margin-top: 20px;margin-left: 15px;">Register</button> 
 				</form>
 			</div>
 		</div>

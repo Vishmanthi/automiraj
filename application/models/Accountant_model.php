@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 Class Accountant_model extends CI_Model{
+	function __construct() {
+        parent::__construct();
+        $this->load->database("");
+    }
 	public function add_stock($info,$qty){
 		$this->load->database("");
 		$insert_data=$this->db->insert('stock', $info);
@@ -127,7 +131,7 @@ Class Accountant_model extends CI_Model{
 		$this->load->database("");
 		$this->db->select("*");
 		$this->db->from('supplier');
-		$this->db->where('name',$name);
+		$this->db->where('lower(name)',strtolower($name));
 		$result = $this->db->get();
 		return $result->result();
 	}
@@ -145,7 +149,7 @@ Class Accountant_model extends CI_Model{
 	}
 	public function update_supplier2($info,$name){
 		$this->load->database("");
-		$this->db->where('name',$name);
+		$this->db->where('lower(name)',strtolower($name));
 		$update=$this->db->update('supplier',$info);
 		if($update){
 			return true;
@@ -161,5 +165,37 @@ Class Accountant_model extends CI_Model{
 		$this->db->from('supplier');
 		$result = $this->db->get();
 		return $result->result();
+	}
+	public function supplier_stock1($id){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from('stock');
+		$this->db->where('id',$id);
+		$result = $this->db->get();
+		return $result->result();
+	}
+	public function supplier_stock2($name){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from('stock');
+		$this->db->where('name',$name);
+		$result = $this->db->get();
+		return $result->result();
+	}
+	public function reorder_level(){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from('spares_brand');
+		$this->db->where('quantity<=','reorder_level',false);
+		$result = $this->db->get();
+		return $result->result();
+	}
+	public function reorder_count(){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from('spares_brand');
+		$this->db->where('quantity<=','reorder_level',false);
+		$result = $this->db->get();
+		return $result->num_rows();
 	}
 }

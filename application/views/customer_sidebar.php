@@ -78,9 +78,9 @@ div.content {
     
     <div class="sidebar" >
       <div class="w3-center">    
-          <a href="http://[::1]/cis/customer/reserveService" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/add2.png"><br>Reserve Service</a>
-          <a href="http://[::1]/cis/customer/serviceHistory" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/car2.png"><br>Service History</a>
-          <a href="http://[::1]/cis/customer/editProfile" class=" w3-hover-shadow"><img src="<?php echo base_url(); ?>/assests/images/user.png"><br>Edit Profile</a>
+          <a href="http://[::1]/cis/customer/reserveService" class=" w3-hover-shadow" style="text-decoration: none;"><img src="<?php echo base_url(); ?>/assests/images/add2.png"><br>Reserve Service</a>
+          <a href="http://[::1]/cis/customer/serviceHistory" class=" w3-hover-shadow" style="text-decoration: none;"><img src="<?php echo base_url(); ?>/assests/images/car2.png"><br>Service History</a>
+          <a href="http://[::1]/cis/customer/editProfile" class=" w3-hover-shadow" style="text-decoration: none;"><img src="<?php echo base_url(); ?>/assests/images/user.png"><br>Edit Profile</a>
         </div>
     </div>
   </div>

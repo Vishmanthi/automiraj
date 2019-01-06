@@ -3,10 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 Class CustomerDashboard_model extends CI_Model{
 	
-	public function editProfile($nic,$data){
+	public function editProfile($nic,$dat){
 		$this->load->database("");
 		$this->db->where('nic', $nic);
-		$this->db->update('customer', $data);
+		$update=$this->db->update('customer', $dat);
+		if($update){
+			return true;
+		}
+		else{
+			return false;
+		}
 		
 	}
 	public function getCustomerData($userid){
@@ -14,6 +20,15 @@ Class CustomerDashboard_model extends CI_Model{
 		$this->db->select("*");
 		$this->db->from("customer");
 		$this->db->where('id',$userid);
+		$result = $this->db->get();
+		return $result->result();
+		
+	}
+	public function getCustomerData1($nic){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from("customer");
+		$this->db->where('nic',$nic);
 		$result = $this->db->get();
 		return $result->result();
 		
@@ -32,7 +47,12 @@ Class CustomerDashboard_model extends CI_Model{
 			$db_password=$result->row(0)->password;
 			if(password_verify($old,$db_password)){
 				$this->db->where('username', $username);
-				$this->db->update('users', $newPswrd);
+				if($this->db->update('users', $newPswrd)){
+					return true;
+				}
+				else{
+					return false;
+				}
 			}
 			else{
 				return false;
