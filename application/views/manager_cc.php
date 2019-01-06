@@ -13,6 +13,7 @@
 
 	<style type="text/css">
 		body {font-family: "Lato", sans-serif}
+		
 		/*the container must be positioned relative:*/
 		.label1 {font-family: "Lato", sans-serif;display: inline-block;color: rgba(0,0,0,0.6);padding: 10px 0 10px 5px;}
 		.label2	{font-family: "Lato", sans-serif;display: inline-block;color: rgba(0,0,0,0.9);padding: 10px 20px}
@@ -67,6 +68,7 @@
 		.select-items div:hover, .same-as-selected { 
 		  background-color: rgba(0, 0, 0, 0.1);
 		}
+
 		 
 	</style>
 </head>
@@ -76,9 +78,10 @@
 			<a class="" onclick=""><img src="<?php echo base_url(); ?>/assests/images/user.png"><i class="fa fa-circle" style="color: green;font-size: 0.8em;padding-right: 5px"></i>Online</a>
 		    <!-- <a class="" href="customers"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add Customer</a> -->
 		    <!-- <a class="" href="vehicle"><i class="fa fa-car" style="padding-right: 10px"></i>Add Vehicle</a> -->
-		    <a class="" href="<?php echo base_url(); ?>Manager/dailyServices"><i class="fa fa-file-text" style="padding-right: 10px"></i>Daily services analysis</a>
-			<a class="" href="<?php echo base_url(); ?>Manager/salesAnalysis"><i class="fa fa-file-text" style="padding-right: 10px"></i>Revenue analysis</a>
-		    <a class="" href="<?php echo base_url(); ?>Manager/dailySpares"><i class="fa fa-history" style="padding-right: 10px"></i>Spares usage</a>
+		    <a class="" href="<?php echo base_url(); ?>Manager/dailyServices"><i class="fa fa-pie-chart" style="padding-right: 10px"></i>Daily services analysis</a>
+			<a class="" href="<?php echo base_url(); ?>Manager/salesAnalysis"><i class="fa fa-line-chart" style="padding-right: 10px"></i>Revenue analysis</a>
+		    <a class="" href="<?php echo base_url(); ?>Manager/dailySpares"><i class="fa fa-wrench" style="padding-right: 10px"></i>Spares usage</a>
+		    <a class="" href="<?php echo base_url(); ?>Manager/addUser"><i class="fa fa-address-card-o" style="padding-right: 10px"></i>Add User</a>
 		    <a class="" href="<?php echo base_url(); ?>Manager/customercare"><i class="fa fa-user" style="padding-right: 10px"></i>Customer care</a>
 		</div>
 		<div class="content" style="background: #f0f0f0;height: auto;min-height: 670px;">

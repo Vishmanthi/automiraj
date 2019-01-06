@@ -1,7 +1,7 @@
 <?php
 
 class Customers extends CI_Controller{
-	public function index(){
+	public function customer(){
 		//$data['main_view']="addCustomer_view";
 		
 		$this->load->view('addCustomer_view');
@@ -27,14 +27,14 @@ class Customers extends CI_Controller{
 					//'nErr' =>$this->valid_nic($nic)
             );
             $this->session->set_flashdata($data);
-            redirect('index.php/customers');
+            redirect('customers/customer');
 
 	 	}else{
 	 		$this->load->model('customer_model');
 	 		$this->customer_model->create_customer();
 			 	//echo "customer created";
 			 	$this->session->set_flashdata('cusReg_success','New customer added!!');
-			 	redirect('index.php/customers');
+			 	redirect('customers/customer');
 			 }
 			 // }else{
 			 // 	echo "something wrong";

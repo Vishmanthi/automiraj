@@ -41,8 +41,8 @@
 					<?php foreach ($vehicleData as $row) {?>
 						<div class="w3-hover-shadow w3-card" style="padding: 7px;width: 80%;cursor: pointer;border-radius: 5px;background-color: rgba(255,225,0,0.38);margin-bottom: 10px;">
 							<?php echo $row->veh_reg_no; ?>
-								<span style="margin-left: 10px;"><?php echo $row->make; ?></span>
-								<span style="margin-left: 10px;"><?php echo $row->model; ?></span>
+							<span style="margin-left: 10px;"><?php echo $row->make; ?></span>
+							<span style="margin-left: 10px;"><?php echo $row->model; ?></span>
 						</div>
 					<?php } ?>
 

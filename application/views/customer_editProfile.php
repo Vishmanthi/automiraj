@@ -32,56 +32,83 @@
 			<div class="w3-row-padding">
 				<div class="w3-col m7" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right: 16px">
 					<h3 class="mont" style="padding: 20px 20px 7px;color: rgba(0,0,0,0.7);">Edit Basic Information</h3>
-					<form method="post" action="../customer/editProfileDetails">
+					<form method="post" action="../customer/editProfileDetails" autocomplete="off">
+
+						<?php if (isset($cusData)){?>
 						<?php foreach ($cusData as $row) {?>
 						<div class="w3-row-padding">
 							<div class="w3-col w3-container" style="width: 10%;">
 								<label>Title</label>
-								<input class="w3-input w3-border w3-round" type="text" name="title" placeholder="<?php echo $row->title ?>" value="<?php echo $row->title ?>">
+								<input class="w3-input w3-border w3-round" type="text" name="title" placeholder="<?php echo $row->title ?>" value="<?php echo $row->title ?>" onfocus="this.value=''">
 							</div>
 							<div class="w3-col w3-container" style="width: 45%;">
-								<label>First Name</label>
-								<input class="w3-input w3-border w3-round" type="text" name="fname" placeholder="<?php echo $row->first_name; ?>" value="<?php echo $row->first_name; ?>">
+								<div class="w3-col" style="width: 50%;">
+									<label>First Name</label>
+								</div>
+								<div class="w3-col" style="width: 50%;color: red;">
+										<?php echo form_error('fname'); ?>
+								</div>
+								<input class="w3-input w3-border w3-round" type="text" name="fname" placeholder="<?php echo $row->first_name; ?>" value="<?php echo $row->first_name; ?>" onfocus="this.value=''">
 							</div>
 							<div class="w3-col w3-container" style="width: 45%;">
-								<label>Last Name</label>
-								<input class="w3-input w3-border w3-round" type="text" name="lname" placeholder="<?php echo $row->last_name; ?>" value="<?php echo $row->last_name; ?>">
+								<div class="w3-col" style="width: 50%;">
+									<label>Last Name</label>
+								</div>
+								<div class="w3-col" style="width: 50%;color: red;">
+										<?php echo form_error('lname'); ?>
+								</div>
+								<input class="w3-input w3-border w3-round" type="text" name="lname" placeholder="<?php echo $row->last_name; ?>" value="<?php echo $row->last_name; ?>" onfocus="this.value=''">
 							</div>
 						</div>
 						<div class="w3-row-padding">
 							<div class="w3-col w3-container" style="width: 100%;">
 								<label>NIC No</label>
-								<input class="w3-input w3-border w3-round w3-disabled" style="background-color: rgba(0,0,0,0.1);" type="text" name="nic" placeholder="" value="<?php echo $row->nic; ?>">
+								<input class="w3-input w3-border w3-round w3-disabled" style="background-color: rgba(0,0,0,0.1);" type="text" name="nic" placeholder="" value="<?php echo $row->nic; ?>" id="pas1">
 							</div>						
 						</div>
 						<div class="w3-row-padding">
 							<div class="w3-col w3-container" style="width: 100%;">
-								<label>Address</label>
-								<input class="w3-input w3-border w3-round" type="text" name="add" placeholder="<?php echo $row->address; ?>" value="<?php echo $row->address; ?>">
+								<div class="w3-col" style="width: 50%;">
+									<label>Address</label>
+								</div>
+								<div class="w3-col" style="width: 50%;color: red;">
+										<?php echo form_error('add'); ?>
+								</div>
+								<input class="w3-input w3-border w3-round" type="text" name="add" placeholder="<?php echo $row->address; ?>" value="<?php echo $row->address; ?>" onfocus="this.value=''">
 							</div>						
 						</div>
 						<div class="w3-row-padding">
 							<div class="w3-col w3-container" style="width: 50%;">
-								<label>Contact Number</label>
-								<input class="w3-input w3-border w3-round" type="text" name="cno" placeholder="<?php echo $row->phone; ?>" value="<?php echo $row->phone; ?>">
+								<div class="w3-col" style="width: 50%;">
+									<label>Contact Number</label>
+								</div>
+								<div class="w3-col" style="width: 50%;color: red;">
+										<?php echo form_error('cno'); ?>
+								</div>
+								<input class="w3-input w3-border w3-round" type="text" name="cno" placeholder="<?php echo $row->phone; ?>" value="<?php echo $row->phone; ?>" onfocus="this.value=''">
 							</div>
 							<div class="w3-col w3-container" style="width: 50%;">
-								<label>Email</label>
-								<input class="w3-input w3-border w3-round" type="text" name="email" placeholder="<?php echo $row->email; ?>" value="<?php echo $row->email; ?>">
+								<div class="w3-col" style="width: 50%;">
+									<label>Email</label>
+								</div>
+								<div class="w3-col" style="width: 50%;color: red;">
+										<?php echo form_error('email'); ?>
+								</div>
+								<input class="w3-input w3-border w3-round" type="email" name="email" placeholder="<?php echo $row->email; ?>" value="<?php echo $row->email; ?>" onfocus="this.value=''">
 							</div>
 							
 						</div>
+						<?php } ?>
 						<?php } ?>
 						<div class="w3-row-padding">
 							<div class="w3-col w3-container" style="width: 20%;">
 								<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 10px 0;padding: 15px 20px;">Update Profile</button>
 							</div>
-							<div class="w3-col w3-right" style="width: 40%;">
-									<div class="w3-light-green" style="border-radius: 3px;margin-top: 20px;">
-							        	<?php if($this->session->flashdata('customerUpdate_success')):?>
-							        	<?php echo $this->session->flashdata('customerUpdate_success');?>
-							        	<?php endif;?>
-							        </div>
+							<div class="w3-col" style="width: 40%;margin-top: 20px;margin-left: 10px;">
+									
+							    <span style="color: green;"><?php echo $this->session->flashdata('customerUpdate_success');?></span>
+							    <span style="color: red;"><?php echo $this->session->flashdata('customerUpdate_error');?></span>
+							        
 							</div>
 						</div>
 						</form>
@@ -89,16 +116,40 @@
 				<div class="w3-col m4 " style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;">
 					<h3 class="mont" style="padding: 20px 20px 7px;color: rgba(0,0,0,0.7);">Change Password</h3>
 					<form method="post" action="../customer/changePassword">
+						<input type="hidden" name="nic" value="" id="pas">
 						<div class="w3-container" style="width: 100%;">
-							<label>Current Password</label>
+							<div class="w3-col" style="width: 50%;">
+								<label>Current Password</label>
+							</div>
+							<div class="w3-col" style="width: 50%;color: red;">
+								<?php echo form_error('old'); ?>
+							</div>
 							<input class="w3-input w3-border w3-round" type="Password" name="old" placeholder="">
-							<label>New Password</label>
+							<div class="w3-col" style="width: 50%;">
+								<label>New Password</label>
+							</div>
+							<div class="w3-col" style="width: 50%;color: red;">
+								<?php echo form_error('new'); ?>
+							</div>
 							<input class="w3-input w3-border w3-round" type="Password" name="new" placeholder="">
-							<label>Repeat New Password</label>
+							<div class="w3-col" style="width: 50%;">
+								<label>Repeat New Password</label>
+							</div>
+							<div class="w3-col" style="width: 50%;color: red;">
+								<?php echo form_error('repNew'); ?>
+							</div>
 							<input class="w3-input w3-border w3-round" type="Password" name="repNew" placeholder="">
 						</div>
-						<div class="w3-center">
-							<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 10px 0;padding: 15px 20px;">Change Password</button>
+						<div class="w3-row-padding">
+							<div class="w3-col" style="width:30%">
+								<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 10px 0;padding: 15px 20px;">Change Password</button>
+							</div>
+							<div class="w3-col" style="width: 40%;margin-top: 20px;margin-left: 45px;">
+										
+								    <span style="color: green;"><?php echo $this->session->flashdata('pass_success');?></span>
+								    <span style="color: red;"><?php echo $this->session->flashdata('pass_error');?></span>
+								        
+							</div>
 						</div>
 					</form>
 				</div>
@@ -106,3 +157,8 @@
 		</div>
 	</div>
 </body>
+<script>
+	var nic=document.getElementById("pas1").value;
+	document.getElementById("pas").value=nic;
+</script>
+</html>
