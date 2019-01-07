@@ -4,6 +4,7 @@ class Accountant extends CI_Controller {
 	function __construct() {
         parent::__construct();
         $this->load->model('accountant_model');
+        $this->load->library('pdf');
     }
 	public function dashboard(){
 		$data['count']=$this->accountant_model->reorder_count();
@@ -19,7 +20,11 @@ class Accountant extends CI_Controller {
 		$this->load->view("accountant_supplier",$data);
 	}
 	public function add_new(){
-		$this->load->view("accountant_addItem");
+		$data['item']=$this->accountant_model->all_item();
+		$this->load->view("accountant_addItem",$data);
+	}
+	public function manage_report(){
+		$this->load->view("accountant_report");
 	}
 	public function add_stock(){
 		$info=array(
@@ -28,7 +33,7 @@ class Accountant extends CI_Controller {
 			'brand'=>$this->input->post('brand'),
 			'quantity_added' => $this->input->post('qty'),
 			'purchase_price' => $this->input->post('p_price'),
-			'supplier_name' => $this->input->post('supp_name')
+			'supplier_id' => $this->input->post('supp_name')
 		);
 		$qty=$this->input->post('qty');
 		
@@ -36,7 +41,7 @@ class Accountant extends CI_Controller {
 		$this->form_validation->set_rules('brand', 'Brand name', 'required');
 		$this->form_validation->set_rules('qty', 'Quantity', 'required');
 		$this->form_validation->set_rules('p_price', 'Purchase price', 'required');
-		$this->form_validation->set_rules('supp_name', 'Supplier name', 'required');
+		$this->form_validation->set_rules('supp_name', 'Supplier ID', 'required');
 		$this->form_validation->set_message('required', 'Required');
 		if ($this->form_validation->run() == true){
 			if($this->accountant_model->add_stock($info,$qty)){
@@ -320,6 +325,52 @@ class Accountant extends CI_Controller {
 			$this->load->view('accountant_supplier',$data);
 		}
 		
+	}
+	public function add_item(){
+		$this->form_validation->set_rules('itemcode', 'Item Code', 'required');
+		$this->form_validation->set_rules('itemname', 'Item Name', 'required');
+		$this->form_validation->set_rules('reorder', 'Reorder Level', 'required');
+		$this->form_validation->set_rules('sprice', 'Selling Price', 'required');
+		$this->form_validation->set_message('required', 'Required');
+		if ($this->form_validation->run() == true){
+			$info=array(
+				'spare_id'=>$this->input->post('itemcode'),
+				'name'=>$this->input->post('itemname')
+			);
+			$info1=array(
+				'spare_id'=>$this->input->post('itemcode'),
+				'brand_name'=>$this->input->post('brand'),
+				'unit_price'=>$this->input->post('sprice'),
+				'quantity'=>0,
+				'reorder_level'=>$this->input->post('reorder')
+			);
+			if($this->accountant_model->add_item($info,$info1)){
+				$this->session->set_flashdata('addsuc', "Item added Successfully!");
+			}
+			else{
+				$this->session->set_flashdata('adderr', "Error!");
+			}
+		}
+		$data['item']=$this->accountant_model->all_item();
+		$this->load->view("accountant_addItem",$data);
+	}
+	public function inventory_report(){
+		$this->load->library('pdf');
+		$basis=$this->input->post('basis');
+		$date=$this->input->post('date');
+		if($basis=='day'){
+			$html_content=$this->accountant_model->inventory_reportD($date);
+			$this->pdf->loadHtml($html_content);
+	        $this->pdf->render();
+	        $this->pdf->stream("InventoryUsageDaily.pdf",array("Attachment"=>0));
+		}
+		else if($basis=='month'){
+			$html_content=$this->accountant_model->inventory_reportM($date);
+			$this->pdf->loadHtml($html_content);
+	        $this->pdf->render();
+	        $this->pdf->stream("InventoryUsageMonthly.pdf",array("Attachment"=>0));
+		}
+
 	}
 }
 

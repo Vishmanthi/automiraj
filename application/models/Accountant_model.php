@@ -170,15 +170,16 @@ Class Accountant_model extends CI_Model{
 		$this->load->database("");
 		$this->db->select("*");
 		$this->db->from('stock');
-		$this->db->where('id',$id);
+		$this->db->where('supplier_id',$id);
 		$result = $this->db->get();
 		return $result->result();
 	}
 	public function supplier_stock2($name){
 		$this->load->database("");
 		$this->db->select("*");
-		$this->db->from('stock');
-		$this->db->where('name',$name);
+		$this->db->from('stock as s');
+		$this->db->join("supplier as su","su.id=s.supplier_id");
+		$this->db->where('su.name',$name);
 		$result = $this->db->get();
 		return $result->result();
 	}
@@ -198,4 +199,126 @@ Class Accountant_model extends CI_Model{
 		$result = $this->db->get();
 		return $result->num_rows();
 	}
+	public function add_item($info,$info1){
+		$insert1=$this->db->insert("spares",$info);
+		$insert2=$this->db->insert("spares_brand",$info1);
+		if($insert1 && $insert2){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public function all_item(){
+		$this->db->select("*");
+		$this->db->from('spares as s');
+		$this->db->join("spares_brand as sb","sb.spare_id=s.spare_id");
+		$result = $this->db->get();
+		return $result->result();
+	}
+	public function daily_report($date){
+		$this->db->select("js.spare_id,js.brand,SUM(quantity) as Quantity_Used");
+		$this->db->from('jobcard as j');
+		$this->db->join("jobcard_spare as js","js.job_id=j.job_id");
+		$this->db->where('date',$date);
+		$this->db->group_by(array("spare_id", "brand"));
+		$result = $this->db->get();
+		return $result->result();
+	}
+	public function monthly_report($date){
+		$this->db->select("js.spare_id,js.brand,SUM(quantity) as Quantity_Used");
+		$this->db->from('jobcard as j');
+		$this->db->join("jobcard_spare as js","js.job_id=j.job_id");
+		$this->db->where("j.date BETWEEN DATE_SUB($date, INTERVAL 30 DAY) AND $date");
+		$this->db->group_by(array("spare_id", "brand"));
+		$result = $this->db->get();
+		return $result->result();
+	}
+	public function inventory_reportD($date){
+		$daily=$this->accountant_model->daily_report($date);
+		$output='<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Cashier dashboard</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            <style>
+            .dblUnderlined { border-bottom: 3px double; }
+            </style>
+        </head>
+        <body>';
+        $output.='<div class="text-center"><h2>Daily Inventory Usage</h2></div><br><br><div class="row"><div class="text-left"><h5>Date:'.$date.'</h5></div>
+        </div><br><label style="margin-bottom: 12px;"><b>Items</b></label>
+        <div style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px;background-color:white;">
+            <div style="margin-bottom: 19px;float:left;"></div>
+            <div style="float: right;margin-bottom: 19px;"></div>
+            <table class="table">
+                <tr>
+          <th scope="col">Item Code</th>
+          <th scope="col">Brand Name</th>
+          <th scope="col">Quantity Used</th>
+                </tr><tbody>';
+                foreach($daily as $s){
+					$output.='	
+                    <tr>
+                      <td>'.$s->spare_id .'</td>
+                      <td>'.$s->brand.'</td>
+                      <td>'. $s->Quantity_Used.'</td>
+                     
+                    </tr>';
+                   }
+                $output.='</tbody></table></div>';
+                
+               
+                
+               
+                $output.='</body></html>';
+                return $output;
+	}
+	public function inventory_reportM($date){
+		$monthly=$this->accountant_model->monthly_report($date);
+		$output='<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Cashier dashboard</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+            <style>
+            .dblUnderlined { border-bottom: 3px double; }
+            </style>
+        </head>
+        <body>';
+        $output.='<div class="text-center"><h2>Monthly Inventory Usage</h2></div><br><br><div class="row"><div class="text-left"><h5>Date:'.$date.'</h5></div>
+        </div><br><label style="margin-bottom: 12px;"><b>Items</b></label>
+        <div style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px;background-color:white;">
+            <div style="margin-bottom: 19px;float:left;"></div>
+            <div style="float: right;margin-bottom: 19px;"></div>
+            <table class="table">
+                <tr>
+          <th scope="col">Item Code</th>
+          <th scope="col">Brand Name</th>
+          <th scope="col">Quantity Used</th>
+                </tr><tbody>';
+                foreach($monthly as $s){
+					$output.='	
+                    <tr>
+                      <td>'.$s->spare_id .'</td>
+                      <td>'.$s->brand.'</td>
+                      <td>'. $s->Quantity_Used.'</td>
+                     
+                    </tr>';
+                   }
+                $output.='</tbody></table></div>';
+                
+               
+                
+               
+                $output.='</body></html>';
+                return $output;
+	}
+
 }

@@ -84,7 +84,7 @@
 			<a class="" href="add_new" style="text-decoration: none"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add new Item </a>
 		    <a class="" href="manage_inventory" style="text-decoration: none"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Manage Inventory</a>
 		    <a class="" href="manage_supplier" style="text-decoration: none"><i class="fa fa-car" style="padding-right: 10px"></i>Manage Suppliers</a>
-		    <a class="" href="" style="text-decoration: none"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Reports</a>
+		    <a class="" href="manage_report" style="text-decoration: none"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Reports</a>
 		    
 		</div>
 		<div class="content" style="background: #f0f0f0;height: auto;" id="inventory">
@@ -369,7 +369,7 @@
 						</div>
 						<div class="w3-row-padding">
 							<div class="w3-col w3-container" style="width: 35%">
-								<span class="label1" style="padding-top: 10px;">Supplier Name<span style="color: red;margin-left: 4px;">*</span></span>
+								<span class="label1" style="padding-top: 10px;">Supplier ID<span style="color: red;margin-left: 4px;">*</span></span>
 							</div>
 							<div class="w3-col w3-container" style="width: 65%">
 								<div class="w3-col" style="width: 100%">
@@ -446,7 +446,7 @@
 							</div>
 							<div class="w3-col w3-container" style="width: 65%">
 								<div class="w3-col" style="width: 100%">
-									<input class="w3-input w3-border w3-round" name="supp_name" placeholder="" value="<?php echo $row->supplier_name ?>" type="text" onfocus="this.value=''">
+									<input class="w3-input w3-border w3-round" name="supp_name" placeholder="" value="<?php echo $row->supplier_id ?>" type="text" onfocus="this.value=''">
 								</div>
 							</div>
 						</div>
@@ -469,7 +469,7 @@
 				                <th>Date</th>
 				                <th>Quantity Added</th>
 				                <th>Purchase Price</th>
-				                <th>Supplier Name</th>
+				                <th>Supplier ID</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -480,7 +480,7 @@
 				                <td><?php echo $row->date ?></td>
 				                <td><?php echo $row->quantity_added ?></td>
 				                <td><?php echo $row->purchase_price ?></td>
-				                <td><?php echo $row->supplier_name ?></td>
+				                <td><?php echo $row->supplier_id ?></td>
 				            </tr>
 				            <?php } ?>
 							<?php } ?>
