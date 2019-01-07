@@ -11,6 +11,20 @@
 	<style type="text/css">
 		body {font-family: "Lato", sans-serif}
 	</style>
+	<script type="text/javascript">
+			$('.button-green').click(function(){
+						
+							document.getElementById('id03').style.display='block';
+							nic=$('#nic').text();
+							
+						
+							document.getElementById("pwd").value =nic;
+							document.getElementById("cpwd").value =nic; 
+						
+					
+					});
+	
+	</script>
 </head>
 <body>
 	<div class="w3-content" style="max-width:2000px;margin-top:49px;">
@@ -45,7 +59,13 @@
 					<div class="w3-row">
 						<div class="w3-col m6">
 							<label for="cardno">Title</label>
-			            	<input class="dinput" type="text" id="cardno" name="title" placeholder="" >
+							<select class="w3-select dinput" name="title">
+							<option value="0">Select</option>
+							<option value="Mr">Mr</option>
+							<option value="Mrs">Mrs</option>
+							<option value="Miss">Miss</option>
+							</select>
+			            	<!-- <input class="dinput" type="text" id="cardno" name="title" placeholder="" > -->
 			            	<label for="make">First Name</label>
 			            	<input class="dinput" type="text" id="make" name="first_name" placeholder="" >
 			            	<label for="model">Last Name</label>
@@ -53,7 +73,7 @@
 							<label for="model">Address</label>
 			            	<input class="dinput" type="text" id="model" name="address" placeholder="" >
 							<label for="vno">NIC</label>
-			            	<input class="dinput" type="text" id="vno" name="nic" placeholder="" >
+			            	<input id="nic" class="dinput" type="text" id="vno" name="nic" placeholder="" >
 						</div>
 						<div class="w3-col m6">
 							<label for="vno">Phone</label>
@@ -62,10 +82,10 @@
 			            	<input class="dinput" type="text" id="vno" name="email" placeholder="" >
 							<label for="vno">Username</label>
 			            	<input class="dinput" type="text" id="vno" name="username" placeholder="" >
-			            	<label for="vno">Password</label>
-			            	<input class="dinput" type="password" name="password" placeholder="" >
-			            	<label for="">Confirm Password </label>
-			            	<input class="dinput" type="password" id="" name="con_pass" placeholder="">
+			            	<!-- <label for="vno">Password</label> -->
+			            	<input id="pwd" class="dinput" type="hidden" name="password" placeholder="" >
+			            	<!-- <label for="">Confirm Password </label> -->
+			            	<input class="dinput" type="hidden" id="cpwd" name="con_pass" placeholder="">
 
 			            </div>
 									

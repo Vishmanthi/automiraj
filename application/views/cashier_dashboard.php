@@ -75,7 +75,7 @@
 		    <!-- <a class="" href="customers"><i class="fa fa-plus-circle" style="padding-right: 10px"></i>Add Customer</a> -->
 		    <!-- <a class="" href="vehicle"><i class="fa fa-car" style="padding-right: 10px"></i>Add Vehicle</a> -->
 		    <a class="" href="<?php echo base_url(); ?>Cashier/jobcardview"><i class="fa fa-file-text" style="padding-right: 10px"></i>Generate Invoice</a>
-				<a class="" href="<?php echo base_url(); ?>Cashier/jobcardview"><i class="fa fa-file-text" style="padding-right: 10px"></i>Add Discount</a>
+				<!-- <a class="" href="<?php echo base_url(); ?>Cashier/jobcardview"><i class="fa fa-file-text" style="padding-right: 10px"></i>Add Discount</a> -->
 		    <!-- <a class="" href="serviceHistory"><i class="fa fa-history" style="padding-right: 10px"></i>View Service history</a> -->
 		</div>
 		

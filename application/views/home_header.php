@@ -46,7 +46,7 @@ body {font-family: "Lato", sans-serif}
 	  <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="navigation()">ABOUT US</a>
 	  <a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="navigation()">SERVICES</a>
 	  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="navigation()">CONTACT</a>
-	  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="navigation()">PROMOTIONS</a>
+	  <a href="#promotion" class="w3-bar-item w3-button w3-padding-large" onclick="navigation()">PROMOTIONS</a>
 	  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="navigation()">LOGIN</a>
 	</div>
 

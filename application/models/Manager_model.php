@@ -87,7 +87,8 @@ public function getDailySales($date){
 			'id'=>$nid,
 			'username'=>$this->input->post('username'),
 			'password'=>$encripted_pass,
-			'type'=>$this->input->post('type')
+            'type'=>$this->input->post('type'),
+            'email'=>$this->input->post('email')
 		);
 		$insert_data2=$this->db->insert('users',$d2);
 		if($insert_data && $insert_data2){

@@ -210,7 +210,7 @@ public function regUser(){
     //$this->form_validation->set_rules('nic','ID Number','trim|required|regex_match[/[0-9]{12}|[0-9]{9}[V]/]');
     $this->form_validation->set_rules('nic','NIC No','trim|required|callback_valid_nic');
     // $this->form_validation->set_rules('phone','Phone Number','trim|required|exact_length[10]');
-    // $this->form_validation->set_rules('email','Email','trim|required|valid_email');
+     $this->form_validation->set_rules('email','Email','trim|required|valid_email');
      $this->form_validation->set_rules('pwd','Password','trim|required');
      $this->form_validation->set_rules('cpwd','Confirm Password','trim|required|matches[pwd]');
     
@@ -247,7 +247,39 @@ public function regUser(){
             $this->form_validation->set_message('valid_nic', 'The NIC No is not in the correct format');
             return FALSE;
          }
-     } 
+     }
+     
+     
+     public function sentPromotions(){
+        $this->load->view("addPromotions");
+
+    }
+    public function getdataPromotions(){
+        $Item= $_POST["Item"];
+            $Brand= $_POST["Brand"];
+            $Promotion= $_POST["Promotion"];
+            $this->load->Model('promotionModel');
+            $this->promotionModel->getPromotions($Item,$Brand,$Promotion);
+            $this->load->view("addPromotions");
+           }
+    public function getdataPromotions1(){
+        $this->load->Model('promotionModel');
+        $result=$this->promotionModel->getData();
+        return $result;
+    }
+    public function loadPromotionSection(){
+        $data["list"]=$this->getdataPromotions1();
+        $this->load->view("home",$data);
+    }
+    public function deletPromotion(){
+        $Id =$_POST['cord'];
+        $this->load->Model('promotionModel');
+        $this->promotionModel->deleteData($Id);
+        $this->load->view('addPromotions');
+        //redirect('../Manager/')
+        //$this->load->view("home");
+    }
+
 
 }
 

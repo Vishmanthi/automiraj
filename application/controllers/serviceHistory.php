@@ -8,6 +8,7 @@ class ServiceHistory extends CI_Controller{
 		$this->load->model("jobCard_model");
 		$vehicle=$this->input->post('vehicle');
 		$data['jobcard']=$this->jobCard_model->find_jobcard($vehicle);
+		$data['vehicle']=$vehicle;
 		$this->load->view('serviceHistory_view',$data);
 	}
 

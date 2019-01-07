@@ -74,8 +74,15 @@
 							<tr>
 								<td><?php echo $row[0][0]; ?></td>
 								<td><?php echo $row[0][1]; ?></td>
-								<td><?php echo implode(',',$row[1]); ?></td>
-								<td><?php echo implode(',',$row[2]); ?></td>		
+								<td><?php
+								if(isset($row[1])){
+
+								 echo implode(',',$row[1]);} ?></td>
+
+								<td><?php
+								if(isset($row[2])){
+
+								 echo implode(',',$row[2]);} ?></td>		
 							</tr>	
 							
 						

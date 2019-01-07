@@ -18,8 +18,8 @@ class Customers extends CI_Controller{
 		$this->form_validation->set_rules('nic','ID Number','trim|required|callback_valid_nic');
 	 	$this->form_validation->set_rules('phone','Phone Number','trim|required|exact_length[10]');
 	 	$this->form_validation->set_rules('email','Email','trim|required|valid_email');
-	 	$this->form_validation->set_rules('password','Password','trim|required');
-	 	$this->form_validation->set_rules('con_pass','Confirm Password','trim|required|matches[password]');
+	 	//$this->form_validation->set_rules('password','Password','trim|required');
+	 	//$this->form_validation->set_rules('con_pass','Confirm Password','trim|required|matches[password]');
 	    
 	 	if($this->form_validation->run()==False){
             $data=array(

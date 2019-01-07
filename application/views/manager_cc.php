@@ -83,6 +83,7 @@
 		    <a class="" href="<?php echo base_url(); ?>Manager/dailySpares"><i class="fa fa-wrench" style="padding-right: 10px"></i>Spares usage</a>
 		    <a class="" href="<?php echo base_url(); ?>Manager/addUser"><i class="fa fa-address-card-o" style="padding-right: 10px"></i>Add User</a>
 		    <a class="" href="<?php echo base_url(); ?>Manager/customercare"><i class="fa fa-user" style="padding-right: 10px"></i>Customer care</a>
+			<a class="" href="<?php echo base_url(); ?>Manager/sentPromotions"><i class="fa fa-money" style="padding-right: 10px"></i>Promotions</a>
 		</div>
 		<div class="content" style="background: #f0f0f0;height: auto;min-height: 670px;">
 			<h2 class="mont" style="padding: 25px 20px 0;">Customer Care</h2>

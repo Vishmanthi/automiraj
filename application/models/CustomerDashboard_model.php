@@ -195,7 +195,7 @@ Class CustomerDashboard_model extends CI_Model{
 
 	public function getReservations($year,$month){
 		$userid=$this->session->user_id;
-		$maxres=4 ;
+		$maxres=12;
 		$count=0;
 		$day;
 		$d=0;
