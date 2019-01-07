@@ -24,7 +24,7 @@ a {text-decoration: none;}
   		<div class="w3-bar w3-card w3-black" style="opacity: 1.0">
 		    <img class="w3-bar-item" style="padding: 0px 0px;height:45px;width: 209px" src="<?php echo base_url(); ?>/assests/images/logo2.png">
 		    <div class="w3-right w3-bar-item buttonop" style="padding: 13px;color: white;text-decoration: none;">
-				<a href="../users/logout" style="color: white;text-decoration: none;">LOGOUT</a>
+				<a href="<?php echo base_url();?>users/logout" style="color: white;text-decoration: none;">LOGOUT</a>
 	      	</div>
 	      	<a href="" class="w3-bar-item w3-left buttonop" style="padding: 13px 15px"><i class="fa fa-bars" style="color: white"></i></a>
 	      	

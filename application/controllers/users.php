@@ -71,6 +71,7 @@ class Users extends CI_Controller{
 				if($result){
 					$this->send_reset_password_email($email,$result);
 					$this->load->view('view_reset_password_sent',array('email'=>$email));
+					//$this->load->view("welcome");
 
 				}else{
 					$this->load->view('resetPass_view',array('error'=>'Email Address not registered!!'));
@@ -150,6 +151,7 @@ class Users extends CI_Controller{
 			$result=$this->customer_model->update_password();
 			if($result){
 				$this->load->view('updatePassSuccess');
+				//redirect("../");
 			}else{
 				$this->load->view('updatePass_view',array('error'=>'Problem updating your password. Please contact'.$this->config->item('vishmanthifernando@gmail.com')));
 			}
