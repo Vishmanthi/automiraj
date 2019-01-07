@@ -31,7 +31,7 @@
 		  	<div class="w3-container " style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: white;">
 		  		<form method="post" action="../serviceHistory/find_jobcard">
 		  			<label for="">Vehicle Registration number</label><br>
-	            	<input class="dinput" type="text" id="" name="vehicle" placeholder="" style="width: 30%;">
+	            	<input class="dinput" type="text" id="" name="vehicle" placeholder="" style="width: 30%;" value="<?php echo set_value('vehicle',(isset($vehicle)) ? $vehicle : '');?>">
 	            	<button class="button-green" type="submit" style="width: 10%;padding: 8px 8px;margin-left: 10px;"> Search</button> 
 	            </form>
 	            	<!--Table -->
@@ -53,8 +53,15 @@
 					        <tr>
 					            <td><?php echo $row[0][0]; ?></td>
 								<td><?php echo $row[0][1]; ?></td>
-								<td><?php echo implode(',',$row[1]); ?></td>
-								<td><?php echo implode(',',$row[2]); ?></td>
+								<td><?php
+								if(isset($row[1])){
+
+								 echo implode(',',$row[1]);} ?></td>
+
+								<td><?php
+								if(isset($row[2])){
+
+								 echo implode(',',$row[2]);} ?></td>
 
 					        </tr>
 					        <?php } ?>

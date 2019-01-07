@@ -47,7 +47,7 @@ class Customer_model extends CI_Model{
 			'last_name'=>$this->input->post('last_name'),
 			'nic'=>$this->input->post('nic'),
 			'phone'=>$this->input->post('phone'),
-			//'email'=>$this->input->post('email'),
+			'email'=>$this->input->post('email'),
 			'address'=>$this->input->post('address')
 			// 'username'=>$this->input->post(),
 			// 'password'=>$encripted_pass

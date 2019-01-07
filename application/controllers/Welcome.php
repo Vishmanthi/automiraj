@@ -20,7 +20,10 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('home');
+		$this->load->model('promotionModel');
+		$data["list"]=$this->promotionModel->getData();
+        $this->load->view("home",$data);
+		//$this->load->view('home');
 		$this->load->view('home_header');
 	}
 	public function log()

@@ -189,7 +189,7 @@ span.psw {
     
   </tr>
 <?php
-    if(isset($list)){
+    // if(!empty($list)){
     foreach ($list as $row){
         echo "<tr>
                 <td>".$row->Item."</td>
@@ -198,7 +198,7 @@ span.psw {
                 <td>".$row->Id."</td>
                 
                 </tr>";
-    }  
+   // }  
     }
     echo "</table>"
  ?>

@@ -99,7 +99,7 @@
 				<?php endif; ?></p>
 				
 		<div class="w3-container" style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px; width:85%;background-color: white;">
-			<form action="../jobCard/genJobcard" method="post">
+			<form action="<?php echo base_url();?>jobCard/genJobcard" method="post">
 				<div class="w3-row">
 					<div class="w3-col m6">
 						<label for="cardno">Job card No</label>

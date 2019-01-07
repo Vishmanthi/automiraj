@@ -275,7 +275,9 @@ public function regUser(){
         $Id =$_POST['cord'];
         $this->load->Model('promotionModel');
         $this->promotionModel->deleteData($Id);
-        $this->load->view("home");
+        $this->load->view('addPromotions');
+        //redirect('../Manager/')
+        //$this->load->view("home");
     }
 
 
