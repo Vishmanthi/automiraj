@@ -42,15 +42,15 @@
 			<h2 class="mont" style="padding: 25px 20px 0;">Add new Item</h2>
 			<hr style="border-color: rgba(0,0,0,0.2);">
 			<div class="w3-row-padding">
-				<div class="w3-col" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right:16px;width: 50%">
+				<div class="w3-col" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right:16px;width: 45%">
 					<h3 class="mont" style="padding: 20px 20px 7px;color: rgba(0,0,0,0.7);">Add Item</h3>
-					<form action="../accountant/add_item" method="post">
+					<form action="../accountant/add_item" method="post" autocomplete="off">
 						<div class="w3-row-padding" style="padding: 6px;">
 							<div class="w3-col" style="width: 25%">
 								<span class="label1">Item Code</span>
 							</div>
 							<div class="w3-col" style="width:50%">
-								<input class="w3-input w3-border w3-round" name="itemcode" placeholder="" value="<?php echo set_value('itemcode'); ?>" type="text">
+								<input class="w3-input w3-border w3-round" name="itemcode" placeholder="" value="" type="text" onfocus="this.value=''">
 							</div>
 							<span style="color: red;"><?php echo form_error('itemcode'); ?></span>
 						</div>
@@ -59,17 +59,37 @@
 								<span class="label1">Item Name</span>
 							</div>
 							<div class="w3-col" style="width:50%">
-								<input class="w3-input w3-border w3-round" name="itemname" placeholder="" value="<?php echo set_value('itemname'); ?>" type="text">
+								<input class="w3-input w3-border w3-round" name="itemname" placeholder="" value="" type="text" onfocus="this.value=''">
 							</div>
 							<span style="color: red;"><?php echo form_error('itemname'); ?></span>
 						</div>
-						
+						<div class="w3-center">
+							<span style="color: green;margin-left: 20px;"><?php echo $this->session->flashdata('addsuc');?></span>
+							<span style="color: red;margin-left: 20px;"><?php echo $this->session->flashdata('adderr');?></span>
+						</div>
+						<div class="w3-center">
+							<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 10px 0;padding: 15px 20px;">Add Item</button>
+						</div>
+					</form>
+				</div>
+				<div class="w3-col" style="border: 1px solid lightgrey;border-radius: 3px;background-color: white;margin-right:16px;width: 45%">
+					<h3 class="mont" style="padding: 20px 20px 7px;color: rgba(0,0,0,0.7);">Add Brand</h3>
+					<form action="../accountant/add_brand" method="post" autocomplete="off">
+						<div class="w3-row-padding" style="padding: 6px;">
+							<div class="w3-col" style="width: 25%">
+								<span class="label1">Item Code</span>
+							</div>
+							<div class="w3-col" style="width:50%">
+								<input class="w3-input w3-border w3-round" name="item_code" placeholder="" value="" type="text" onfocus="this.value=''">
+							</div>
+							<span style="color: red;"><?php echo form_error('item_code'); ?></span>
+						</div>
 						<div class="w3-row-padding" style="padding: 6px;">
 							<div class="w3-col" style="width: 25%">
 								<span class="label1">Brand Name</span>
 							</div>
 							<div class="w3-col" style="width:50%">
-								<input class="w3-input w3-border w3-round" name="brand" placeholder="" value="<?php echo set_value('brand'); ?>" type="text">
+								<input class="w3-input w3-border w3-round" name="brand" placeholder="" value="" type="text" onfocus="this.value=''">
 							</div>
 							<span style="color: red;"><?php echo form_error('brand'); ?></span>
 						</div>
@@ -78,7 +98,7 @@
 								<span class="label1">Reorder Level</span>
 							</div>
 							<div class="w3-col" style="width:50%">
-								<input class="w3-input w3-border w3-round" name="reorder" placeholder="" value="<?php echo set_value('reorder'); ?>" type="number">
+								<input class="w3-input w3-border w3-round" name="reorder" placeholder="" value="" type="number" onfocus="this.value=''">
 							</div>
 							<span style="color: red;"><?php echo form_error('reorder'); ?></span>
 						</div>
@@ -87,16 +107,16 @@
 								<span class="label1">Selling Price</span>
 							</div>
 							<div class="w3-col" style="width:50%">
-								<input class="w3-input w3-border w3-round" name="sprice" placeholder="" value="<?php echo set_value('sprice'); ?>" type="text">
+								<input class="w3-input w3-border w3-round" name="sprice" placeholder="" value="" type="text" onfocus="this.value=''">
 							</div>
 							<span style="color: red;"><?php echo form_error('sprice'); ?></span>
 						</div>
 						<div class="w3-center">
-							<span style="color: green;margin-left: 20px;"><?php echo $this->session->flashdata('addsuc');?></span>
-							<span style="color: red;margin-left: 20px;"><?php echo $this->session->flashdata('adderr');?></span>
+							<span style="color: green;margin-left: 20px;"><?php echo $this->session->flashdata('addBsuc');?></span>
+							<span style="color: red;margin-left: 20px;"><?php echo $this->session->flashdata('addBerr');?></span>
 						</div>
 						<div class="w3-center">
-							<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 10px 0;padding: 15px 20px;">Add Item</button>
+							<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="margin: 10px 0;padding: 15px 20px;">Add Brand</button>
 						</div>
 					</form>
 				</div>

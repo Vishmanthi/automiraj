@@ -84,7 +84,7 @@
 								<div class="w3-col" style="width: 50%;color: red;margin-top: -15px;">
 									<?php echo form_error('s_id'); ?>
 								</div>
-								<input class="w3-input w3-border w3-round" type="text" name="s_id" placeholder="" value="<?php echo set_value('s_id',(isset($id)) ? $id : ''); ?>" onfocus="this.value=''" id="s_id">
+								<input class="w3-input w3-border w3-round" type="text" name="s_id" placeholder="" value="<?php echo set_value('s_id',(isset($id)) ? $id : ''); ?>" onfocus="this.value=''" id="s_id" autocomplete="off">
 							</div>
 							<div class="w3-col" style="width: 40%">
 								<div class="w3-col" style="width: 50%">

@@ -329,26 +329,52 @@ class Accountant extends CI_Controller {
 	public function add_item(){
 		$this->form_validation->set_rules('itemcode', 'Item Code', 'required');
 		$this->form_validation->set_rules('itemname', 'Item Name', 'required');
-		$this->form_validation->set_rules('reorder', 'Reorder Level', 'required');
-		$this->form_validation->set_rules('sprice', 'Selling Price', 'required');
 		$this->form_validation->set_message('required', 'Required');
 		if ($this->form_validation->run() == true){
 			$info=array(
 				'spare_id'=>$this->input->post('itemcode'),
 				'name'=>$this->input->post('itemname')
 			);
-			$info1=array(
-				'spare_id'=>$this->input->post('itemcode'),
+			if($this->accountant_model->add_item($info)){
+				$this->session->set_flashdata('addsuc', "Item added Successfully!");
+			}
+			else{
+				$this->session->set_flashdata('adderr', "Error!");
+			}
+		}
+		$data['item']=$this->accountant_model->all_item();
+		$this->load->view("accountant_addItem",$data);
+	}
+	public function itemcode_check($str){
+		
+		$r=$this->accountant_model->search_id($str);
+		if($r==false){
+			$this->form_validation->set_message('itemcode_check', 'Invalid {field}');
+			return false;
+		}
+		else{
+			return true;
+		}
+
+	}
+	public function add_brand(){
+		$this->form_validation->set_rules('item_code', 'Item Code', 'required|callback_itemcode_check');
+		$this->form_validation->set_rules('reorder', 'Reorder Level', 'required');
+		$this->form_validation->set_rules('sprice', 'Selling Price', 'required');
+		$this->form_validation->set_message('required', 'Required');
+		if ($this->form_validation->run() == true){
+			$info=array(
+				'spare_id'=>$this->input->post('item_code'),
 				'brand_name'=>$this->input->post('brand'),
 				'unit_price'=>$this->input->post('sprice'),
 				'quantity'=>0,
 				'reorder_level'=>$this->input->post('reorder')
 			);
-			if($this->accountant_model->add_item($info,$info1)){
-				$this->session->set_flashdata('addsuc', "Item added Successfully!");
+			if($this->accountant_model->add_brand($info)){
+				$this->session->set_flashdata('addBsuc', "Brand added Successfully!");
 			}
 			else{
-				$this->session->set_flashdata('adderr', "Error!");
+				$this->session->set_flashdata('addBerr', "Error!");
 			}
 		}
 		$data['item']=$this->accountant_model->all_item();
@@ -359,18 +385,20 @@ class Accountant extends CI_Controller {
 		$basis=$this->input->post('basis');
 		$date=$this->input->post('date');
 		if($basis=='day'){
+			$data['usage']=$this->accountant_model->inventory_reportD($date);
 			$html_content=$this->accountant_model->inventory_reportD($date);
 			$this->pdf->loadHtml($html_content);
 	        $this->pdf->render();
-	        $this->pdf->stream("InventoryUsageDaily.pdf",array("Attachment"=>0));
+	        $this->pdf->stream("InventoryUsageDaily($date).pdf",array("Attachment"=>0));
 		}
 		else if($basis=='month'){
+			$data['usage']=$this->accountant_model->inventory_reportM($date);
 			$html_content=$this->accountant_model->inventory_reportM($date);
 			$this->pdf->loadHtml($html_content);
 	        $this->pdf->render();
-	        $this->pdf->stream("InventoryUsageMonthly.pdf",array("Attachment"=>0));
+	        $this->pdf->stream("InventoryUsageMonthly(To $date).pdf",array("Attachment"=>0));
 		}
-
+		$this->load->view("accountant_report",$data);
 	}
 }
 

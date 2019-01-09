@@ -43,6 +43,20 @@ Class Accountant_model extends CI_Model{
 			return false;
 		}
 	}
+	public function search_id($str){
+		$this->load->database("");
+		$this->db->select("*");
+		$this->db->from('spares');
+		$this->db->where('lower(spare_id)',strtolower($str));
+		$result = $this->db->get();
+		if($result->num_rows() >0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	public function searchStock($info){
 		$this->load->database("");
 		$this->db->select("*");
@@ -199,10 +213,18 @@ Class Accountant_model extends CI_Model{
 		$result = $this->db->get();
 		return $result->num_rows();
 	}
-	public function add_item($info,$info1){
-		$insert1=$this->db->insert("spares",$info);
-		$insert2=$this->db->insert("spares_brand",$info1);
-		if($insert1 && $insert2){
+	public function add_item($info){
+		$insert=$this->db->insert("spares",$info);
+		if($insert){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	public function add_brand($info){
+		$insert=$this->db->insert("spares_brand",$info);
+		if($insert){
 			return true;
 		}
 		else{
@@ -217,19 +239,21 @@ Class Accountant_model extends CI_Model{
 		return $result->result();
 	}
 	public function daily_report($date){
-		$this->db->select("js.spare_id,js.brand,SUM(quantity) as Quantity_Used");
+		$this->db->select("js.spare_id,js.brand,SUM(js.qty) as Quantity_Used");
 		$this->db->from('jobcard as j');
 		$this->db->join("jobcard_spare as js","js.job_id=j.job_id");
-		$this->db->where('date',$date);
-		$this->db->group_by(array("spare_id", "brand"));
+		$this->db->where('j.date',$date);
+		$this->db->group_by(array("js.spare_id", "js.brand"));
 		$result = $this->db->get();
 		return $result->result();
 	}
 	public function monthly_report($date){
-		$this->db->select("js.spare_id,js.brand,SUM(quantity) as Quantity_Used");
+		$datem=date('Y-m-d', strtotime('-30 days',strtotime($date)));
+		$this->db->select("js.spare_id,js.brand,SUM(qty) as Quantity_Used");
 		$this->db->from('jobcard as j');
 		$this->db->join("jobcard_spare as js","js.job_id=j.job_id");
-		$this->db->where("j.date BETWEEN DATE_SUB($date, INTERVAL 30 DAY) AND $date");
+		$this->db->where("j.date >=",$datem);
+		$this->db->where("j.date <=",$date);
 		$this->db->group_by(array("spare_id", "brand"));
 		$result = $this->db->get();
 		return $result->result();
@@ -259,6 +283,7 @@ Class Accountant_model extends CI_Model{
           <th scope="col">Item Code</th>
           <th scope="col">Brand Name</th>
           <th scope="col">Quantity Used</th>
+          
                 </tr><tbody>';
                 foreach($daily as $s){
 					$output.='	
@@ -266,7 +291,7 @@ Class Accountant_model extends CI_Model{
                       <td>'.$s->spare_id .'</td>
                       <td>'.$s->brand.'</td>
                       <td>'. $s->Quantity_Used.'</td>
-                     
+                      
                     </tr>';
                    }
                 $output.='</tbody></table></div>';
@@ -279,6 +304,7 @@ Class Accountant_model extends CI_Model{
 	}
 	public function inventory_reportM($date){
 		$monthly=$this->accountant_model->monthly_report($date);
+		$datem=date('Y-m-d', strtotime('-30 days',strtotime($date)));
 		$output='<!DOCTYPE html>
         <html>
         <head>
@@ -292,7 +318,7 @@ Class Accountant_model extends CI_Model{
             </style>
         </head>
         <body>';
-        $output.='<div class="text-center"><h2>Monthly Inventory Usage</h2></div><br><br><div class="row"><div class="text-left"><h5>Date:'.$date.'</h5></div>
+        $output.='<div class="text-center"><h2>Monthly Inventory Usage</h2></div><br><br><div class="row"><div class="text-left"><h5>Date: From '.$datem.' to '.$date.'</h5></div>
         </div><br><label style="margin-bottom: 12px;"><b>Items</b></label>
         <div style="padding: 15px 20px 15px 10px;border: 1px solid lightgrey;border-radius: 3px;background-color:white;">
             <div style="margin-bottom: 19px;float:left;"></div>

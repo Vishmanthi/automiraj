@@ -59,14 +59,12 @@
 								  <option value="day">Daily</option>
 								  <option value="month">Monthly</option>
 								</select>
-								
 							</div>
 							<div class="w3-col" style="width: 10%;margin-left: 25px;margin-top: -5px;">
 								<button type="submit" class="w3-button w3-green w3-round w3-hover-shadow w3-hover-green" style="padding: 10px 15px;margin-left: 10px;">Generate Report</button>
 							</div>
 						</form>
 					</div>
-					
 				</div>
 			</div>
 		</div>
